@@ -6,7 +6,8 @@ import {
     getPostById,
     getCommentById,
     getCommentsOfPost,
-    voteToPost
+    upVotePost,
+    downVotePost
 } from './api'
 import 'whatwg-fetch'
 import 'jest-localstorage-mock';
@@ -112,16 +113,8 @@ test("Get comments of unexisting Post", () => {
 test("Voting to a post", () => {
     const postId = '8xf0y6ziyjabvozdd253nd'
     const currentVote = 6
-    return voteToPost(postId, "upVote").then(data => {
+    return upVotePost(postId).then(data => {
         expect(data.voteScore).toEqual(currentVote + 1)
     })
 })
 
-
-test("Voting with an unvalid option", () => {
-    const postId = '8xf0y6ziyjabvozdd253nd'
-    const unvalidOption = Math.random().toString(10)
-    return voteToPost(postId, unvalidOption).then(data => {
-        expect(data).toMatchObject({ 'error': 'There was an error.' })
-    })
-})

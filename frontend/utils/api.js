@@ -48,7 +48,7 @@ export const getCommentsOfPost = (postId) =>
  * POST CALLS
  */
 
-export const voteToPost = (id, option) => {
+const voteToPost = (id, option) => {
     if (option !== "upVote" && option !== "downVote") 
         return new Promise(resolve => resolve({ 'error': 'There was an error.' }))
 
@@ -63,4 +63,9 @@ export const voteToPost = (id, option) => {
     .then(res => res.json())
     .then(data => data)
 }
+
+
+export const upVotePost = (id) => voteToPost(id, "upVote")
+
+export const downVotePost = (id) => voteToPost(id, "downVote")
 
