@@ -7,10 +7,17 @@ import {
     getCommentById,
     getCommentsOfPost,
     upVotePost,
-    downVotePost
+    downVotePost,
+    upVoteComment,
+    downVoteComment,
+    addAPost,
+    updateDetailsOfPost,
+    deletePost,
+    deleteComment,
+    addCommentToPost
 } from './api'
 import 'whatwg-fetch'
-import 'jest-localstorage-mock';
+import 'jest-localstorage-mock'
 
 
 test('Category Structure Test', () => {
@@ -110,11 +117,75 @@ test("Get comments of unexisting Post", () => {
 })
 
 
-test("Voting to a post", () => {
+test("Upvoting a Post", () => {
     const postId = '8xf0y6ziyjabvozdd253nd'
     const currentVote = 6
     return upVotePost(postId).then(data => {
         expect(data.voteScore).toEqual(currentVote + 1)
     })
 })
+
+
+test("Downvoting a Post", () => {
+    const postId = '8xf0y6ziyjabvozdd253nd'
+    const currentVote = 7
+    return downVotePost(postId).then(data => {
+        expect(data.voteScore).toEqual(currentVote - 1)
+    })
+})
+
+
+test("Upvoting a Comment", () => {
+    const commentId = "894tuq4ut84ut8v4t8wun89g" 
+    const currentVote = 6
+    return upVoteComment(commentId).then(data => {
+        expect(data.voteScore).toEqual(currentVote + 1)
+    })
+})
+
+
+test("Downvoting a Comment", () => {
+    const commentId = "894tuq4ut84ut8v4t8wun89g" 
+    const currentVote = 7
+    return downVoteComment(commentId).then(data => {
+        expect(data.voteScore).toEqual(currentVote - 1)
+    })
+})
+
+
+test("Updating details of a unexsiting post", () => {
+    const unexistingId = Math.random().toString(10)
+    return updateDetailsOfPost(unexistingId, "a", "b").then(data => {
+        expect(data).toMatchObject({ 'error': 'There was an error.' })
+    })
+})
+
+
+
+test("Adding a comment to Post", () => {
+    const postId = "8xf0y6ziyjabvozdd253nd"
+    return addCommentToPost(postId, "This a comment", "thingfour").then(data => {
+        return getPostById(postId).then(data => {
+            expect(data.commentCount).toEqual(3)
+        })
+    })
+})
+
+
+test("Delete A Comment", () => {
+    const commentId = "894tuq4ut84ut8v4t8wun89g"
+    return deleteComment(commentId).then(data => {
+        expect(data.deleted).toBeTruthy()
+    })
+})
+
+test("Delete A post", () => {
+    const postId = '8xf0y6ziyjabvozdd253nd'
+    return deletePost(postId).then(data => {
+        expect(data.deleted).toBeTruthy()
+    })
+})
+
+
+
 
