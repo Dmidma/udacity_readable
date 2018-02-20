@@ -60,7 +60,7 @@ test('Get Posts of a "react" Category', () => {
 test('Get Posts of a non existing Category', () => {
     const unexistingCategory = Math.random().toString(10)
     return getPostsByCategory(unexistingCategory).then(data => {
-        expect(data.length).toEqual(0)
+        expect(data).toHaveLength(0)
     })
 })
 
@@ -112,7 +112,7 @@ test("Get comments of a Post", () => {
 test("Get comments of unexisting Post", () => {
     const postId = Math.random().toString(10)
     return getCommentsOfPost(postId).then(data => {
-        expect(data.length).toEqual(0)
+        expect(data).toHaveLength(0)
     })
 })
 
