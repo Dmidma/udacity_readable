@@ -5,7 +5,8 @@ import {
     getPostsByCategory,
     getPostById,
     getCommentById,
-    getCommentsOfPost
+    getCommentsOfPost,
+    voteToPost
 } from './api'
 import 'whatwg-fetch'
 import 'jest-localstorage-mock';
@@ -91,8 +92,36 @@ test("Get unexsiting Comment", () => {
 
 test("Get comments of a Post", () => {
     const postId = '8xf0y6ziyjabvozdd253nd'
-    const commentIds = ["8tu4bsun805n8un48ve89", "894tuq4ut84ut8v4t8wun89g"]
+    const commentsIds = new Set(["8tu4bsun805n8un48ve89", "894tuq4ut84ut8v4t8wun89g"])
     return getCommentsOfPost(postId).then(data => {
-        console.log(data)
+        data.forEach(comment => expect(comment.parentId).toBe(postId))
+        const currentCommentsIds = new Set(data.map(comment => comment.id))
+        expect(commentsIds.isASubsetOf(currentCommentsIds)).toBeTruthy()
+    })
+})
+
+
+test("Get comments of unexisting Post", () => {
+    const postId = Math.random().toString(10)
+    return getCommentsOfPost(postId).then(data => {
+        expect(data.length).toEqual(0)
+    })
+})
+
+
+test("Voting to a post", () => {
+    const postId = '8xf0y6ziyjabvozdd253nd'
+    const currentVote = 6
+    return voteToPost(postId, "upVote").then(data => {
+        expect(data.voteScore).toEqual(currentVote + 1)
+    })
+})
+
+
+test("Voting with an unvalid option", () => {
+    const postId = '8xf0y6ziyjabvozdd253nd'
+    const unvalidOption = Math.random().toString(10)
+    return voteToPost(postId, unvalidOption).then(data => {
+        expect(data).toMatchObject({ 'error': 'There was an error.' })
     })
 })
