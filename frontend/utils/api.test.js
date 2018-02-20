@@ -1,7 +1,11 @@
 import '../extensions/setPrototypeExtending'
 import {
     getCategories,
-    getPosts
+    getPosts,
+    getPostsByCategory,
+    getPostById,
+    getCommentById,
+    getCommentsOfPost
 } from './api'
 import 'whatwg-fetch'
 import 'jest-localstorage-mock';
@@ -29,3 +33,66 @@ test('Posts Structure Test', () => {
 })
 
 
+test('Get Posts of a "react" Category', () => {
+    const postId = '8xf0y6ziyjabvozdd253nd'
+    const category = 'react'
+
+    return getPostsByCategory(category).then(data => {
+        data.forEach(post => {
+            expect(post.category).toBe(category)
+        })
+    
+        expect(data.findIndex(post => post.id === postId))
+            .toBeGreaterThanOrEqual(0)
+        
+    })
+})
+
+test('Get Posts of a non existing Category', () => {
+    const unexistingCategory = Math.random().toString(10)
+    return getPostsByCategory(unexistingCategory).then(data => {
+        expect(data.length).toEqual(0)
+    })
+})
+
+
+test("Get Post by Id", () => {
+    const postId = '8xf0y6ziyjabvozdd253nd'
+    return getPostById(postId).then(data => {
+        expect(data.id).toBe(postId)
+    })
+})
+
+
+test("Get unexisting Post", () => {
+    const postId = Math.random().toString(10)
+    return getPostById(postId).then(data => {
+        expect(data).toMatchObject({ 'error': 'There was an error.' })
+    })
+})
+
+
+test("Get Comment by Id", () => {
+    const commentId = '894tuq4ut84ut8v4t8wun89g'
+    const commentParentId = "8xf0y6ziyjabvozdd253nd"
+    return getCommentById(commentId).then(data => {
+        expect(data.id).toBe(commentId)
+        expect(data.parentId).toBe(commentParentId)
+    })
+})
+
+test("Get unexsiting Comment", () => {
+    const unexistingId = Math.random().toString(10)
+    return getCommentById(unexistingId).then(data => {
+        expect(data).toMatchObject({ 'error': 'There was an error.' })
+    })
+})
+
+
+test("Get comments of a Post", () => {
+    const postId = '8xf0y6ziyjabvozdd253nd'
+    const commentIds = ["8tu4bsun805n8un48ve89", "894tuq4ut84ut8v4t8wun89g"]
+    return getCommentsOfPost(postId).then(data => {
+        console.log(data)
+    })
+})

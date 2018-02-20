@@ -21,3 +21,26 @@ export const getPosts = () =>
     fetch(`${api}/posts`, { headers })
     .then(res => res.json())
     .then(data => data)
+
+
+export const getPostsByCategory = (category) =>
+    fetch(`${api}/${category}/posts`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
+
+export const getPostById = (id) => 
+    fetch(`${api}/posts/${id}`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
+
+export const getCommentById = (id) =>
+    fetch(`${api}/comments/${id}`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
+export const getCommentsOfPost = (postId) => 
+    fetch(`${api}/posts/${postId}/comments`, { headers })
+    .then(res => res.json())
+    .then(data => data)
