@@ -21,4 +21,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # vim swp files
-.swp
+*.swp
+
+
+# ignore code_generator
+**/code_generator

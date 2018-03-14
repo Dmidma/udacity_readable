@@ -10,7 +10,6 @@ import {
     downVotePost,
     upVoteComment,
     downVoteComment,
-    addAPost,
     updateDetailsOfPost,
     deletePost,
     deleteComment,
