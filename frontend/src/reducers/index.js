@@ -7,7 +7,10 @@
 
 import { combineReducers } from 'redux'
 
+import { reducerName } from './reducer'
+import { loggedUser } from './loggedUser'
 
-// import { reducerName } from './FileName'
-
-export default combineReducers({})
+export default combineReducers({
+    reducerName,
+    loggedUser
+})
