@@ -5,36 +5,35 @@ import { Component } from 'react'
 import { connect } from 'react-redux'
 import { addUser } from '../actions/loggedUserActions'
 
-import CardExampleWithAvatar from '../templates/LoginBoxTemplate'
+import LoginBoxTemplate from '../templates/LoginBoxTemplate'
 
 
 class LoginBox extends Component {
-
     componentWillMount() {
         if (this.props.userName !== null) {
             this.props.history.push("/")
         }
     }
-    
+
     state = {
         username: null
     }
 
-    handleButton() {
+    handleLoginSubmit() {
         this.props.addUser(this.state.username)
         this.props.history.push("/")
     }
 
 
-    handleUsernameInput = (e) => {
+    handleUsernameInputChange = (e) => {
         this.setState({username: e.target.value})
     }
 
     render() {
         return (
-            CardExampleWithAvatar(
-                this.handleButton.bind(this),
-                this.handleUsernameInput)
+            LoginBoxTemplate(
+                this.handleLoginSubmit.bind(this),
+                this.handleUsernameInputChange)
         )
     }
 }
@@ -52,5 +51,4 @@ function mapDispatchToProps (dispatch) {
 }
 
 
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LoginBox))
 export default connect(mapStateToProps, mapDispatchToProps)(LoginBox)

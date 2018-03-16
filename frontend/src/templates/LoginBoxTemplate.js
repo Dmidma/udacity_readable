@@ -4,7 +4,7 @@ import {Card, CardTitle, CardText} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 
-const CardExampleWithAvatar = (handleLoginOnClik, handleUsernameInputOnChange) => (
+const LoginBoxTemplate = (handleLoginOnClik, handleUsernameInputOnChange) => (
     <div className="App">
       <h1>Welcome To Readable</h1>
       <Card className="login-box">
@@ -25,4 +25,4 @@ const CardExampleWithAvatar = (handleLoginOnClik, handleUsernameInputOnChange) =
     </div>
 );
 
-export default CardExampleWithAvatar
+export default LoginBoxTemplate
