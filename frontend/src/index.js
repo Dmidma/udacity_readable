@@ -10,6 +10,9 @@ import { createStore, compose } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { PersistGate } from 'redux-persist/integration/react'
 
 
 // used for Redux Dev Tool extension
@@ -23,16 +26,32 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
  * createStore(reducer, applyMiddleware(mid1, mid2, mid3))
  *
  */
-const store = createStore(reducer,
-    composeEnhancers()    
+// const store = createStore(reducer,
+//     composeEnhancers()    
+// )
+
+
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ['loggedUser']
+}
+
+const persistedReducer = persistReducer(persistConfig, reducer)
+
+const store = createStore(persistedReducer,
+    composeEnhancers()
 )
 
+const persistor = persistStore(store)
 
 ReactDOM.render(
     <Provider store={store}>
-        <BrowserRouter>
-            <App /> 
-        </BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+            <BrowserRouter>
+                <App /> 
+            </BrowserRouter>
+        </PersistGate>
     </Provider>,
     document.getElementById('root'));
 
