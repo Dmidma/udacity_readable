@@ -5,10 +5,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import HeaderActionBar from './HeaderActionBar'
 
-
+import { getPosts } from '../utils/api'
 
 class FeedPage extends Component {
-    
     static propTypes = {
         history: PropTypes.object.isRequired
     }
@@ -17,9 +16,10 @@ class FeedPage extends Component {
     componentWillMount() {
         if (this.props.username === null) {
             this.props.history.push("/login")
+        } else {
+           getPosts().then(data => console.log(data)) 
         }
     }
-
 
     render() {
         return (
