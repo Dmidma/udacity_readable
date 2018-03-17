@@ -1,4 +1,4 @@
-import './setPrototypeExtending'
+import './setPrototypeExtension'
 
 test("Set equalities", () => {
     expect.assertions(4)

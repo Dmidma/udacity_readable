@@ -1,33 +1,39 @@
 import React from 'react'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-
+import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
+import FontIcon from 'material-ui/FontIcon'
+import { red500, greenA200 } from 'material-ui/styles/colors'
 
 const PostCardTemplate = () => (
 
-  <Card>
-    <CardHeader
-      title="URL Avatar"
-      subtitle="Subtitle"
-      avatar="images/jsa-128.jpg"
-    />
-    <CardMedia
-      overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
-    >
-      <img src="images/nature-600-337.jpg" alt="" />
-    </CardMedia>
-    <CardTitle title="Card title" subtitle="Card subtitle" />
-    <CardText>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-      Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-      Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-    </CardText>
-    <CardActions>
-      <FlatButton label="Action1" />
-      <FlatButton label="Action2" />
-    </CardActions>
-  </Card>
+
+
+  <div className="same-box">
+    <div className="inside-box">
+        <FontIcon
+            className="material-icons"
+            color={red500}
+            hoverColor={greenA200} >
+                thumb_down
+        </FontIcon>
+        <h3>5</h3>
+        <FontIcon
+            className="material-icons"
+            color={red500}
+            hoverColor={greenA200} >
+                thumb_up
+        </FontIcon>
+    </div>
+    <div className="content-section">
+    <CardTitle 
+        title="Udacity is the best place to learn React" />
+    <p>
+        Posted on 05/02/2018 by thingtwo to react
+    </p>
+
+        <a href="/love"> 34 Comments </a>
+    </div>
+  </div>
+
 )
 
 

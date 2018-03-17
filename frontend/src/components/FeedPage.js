@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 // import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import HeaderActionBar from './HeaderActionBar'
+import PostCard from './PostCard'
 
 import { getPosts } from '../utils/api'
 
@@ -29,15 +30,27 @@ class FeedPage extends Component {
         return (
             <div>
                 <HeaderActionBar username={this.props.username} history={this.props.history} />
-                This is FeedPage component.
+                <br/>
+                <PostCard />
+
+                <PostCard />
+                <PostCard />
+                <PostCard />
+                <PostCard />
+
+                <PostCard />
+                <PostCard />
+                <PostCard />
+                <PostCard />
             </div>
         )
     }
 }
 
-function mapStateToProps ({ loggedUser }) {
+function mapStateToProps ({ loggedUser, posts }) {
     return {
-        username: loggedUser.name
+        username: loggedUser.name,
+        posts: posts
     }
 }
 

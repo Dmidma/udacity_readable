@@ -10,7 +10,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 
 const HeaderActionBarTemplate = (username, handleLogoutOnClik) => (
-    <Toolbar>
+    <Toolbar className="sticky-toolbar">
         <ToolbarGroup firstChild={true}>
             <p className="user-section">Welcome</p> <h4 className="user-section bigger">{username}</h4>
         </ToolbarGroup>
