@@ -46,7 +46,7 @@
 }
 
 
-.same-box {
+.post-box {
     display: flex; 
     width: 90%;
     justify-content: flex-start;
@@ -65,7 +65,7 @@
     border: 0.09em solid #999999;
 }
 
-.same-box:before {
+.post-box:before {
     content: '';
     display: block;
     position: absolute;
@@ -89,3 +89,7 @@
 
 }
 
+
+.content-section {
+    margin-left: 3%;
+}

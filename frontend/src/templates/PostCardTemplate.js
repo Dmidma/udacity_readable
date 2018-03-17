@@ -1,40 +1,53 @@
 import React from 'react'
-import {Card, CardActions, CardTitle, CardText} from 'material-ui/Card';
+import {CardTitle} from 'material-ui/Card';
 import FontIcon from 'material-ui/FontIcon'
 import { red500, greenA200 } from 'material-ui/styles/colors'
 
-const PostCardTemplate = () => (
 
 
 
-  <div className="same-box">
-    <div className="inside-box">
-        <FontIcon
-            className="material-icons"
-            color={red500}
-            hoverColor={greenA200} >
-                thumb_down
-        </FontIcon>
-        <h3>5</h3>
-        <FontIcon
-            className="material-icons"
-            color={red500}
-            hoverColor={greenA200} >
-                thumb_up
-        </FontIcon>
-    </div>
-    <div className="content-section">
-    <CardTitle 
-        title="Udacity is the best place to learn React" />
-    <p>
-        Posted on 05/02/2018 by thingtwo to react
-    </p>
+const PostCardTemplate = (post, handleUpVote, handleDownVote) => {
+    
 
-        <a href="/love"> 34 Comments </a>
-    </div>
-  </div>
+    const currentDate = new Date(post.timestamp)
+    const postDate = `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`
 
-)
+
+    return (
+
+      <div className="post-box">
+        <div>
+            <FontIcon
+                className="material-icons"
+                color={red500}
+                hoverColor={greenA200} 
+                onClick={handleUpVote}
+            >
+                    thumb_up
+            </FontIcon>
+            <h3>{post.voteScore}</h3>
+            <FontIcon
+                className="material-icons"
+                color={red500}
+                hoverColor={greenA200} 
+                onClick={handleDownVote}
+            >
+                    thumb_down
+            </FontIcon>
+        </div>
+        <div className="content-section">
+        <CardTitle 
+            title={post.title} />
+        <p>
+            Posted on {postDate} by {post.author} to {post.category}
+        </p>
+
+            <a href="/love"> {post.commentCount} Comments </a>
+        </div>
+      </div>
+    )
+}
+
 
 
 export default PostCardTemplate

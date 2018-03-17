@@ -7,6 +7,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Page404 from './Page404'
 import LoginBox from './LoginBox'
 import FeedPage from './FeedPage'
+import APost from './APost'
+
 
 
 class App extends Component {
@@ -15,8 +17,9 @@ class App extends Component {
     return (
         <MuiThemeProvider> 
             <Switch>
-                <Route exact path="/" render={({ history }) => (<FeedPage history={history} />)} />
+                <Route exact path="/" component={FeedPage} />
                 <Route exact path="/login" component={LoginBox} />
+                <Route path="/:category/:post_id" component={APost} />
                 <Route component={Page404} />
             </Switch>
         </MuiThemeProvider>

@@ -4,9 +4,10 @@ import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 
+import thunk from 'redux-thunk'
 
 import { BrowserRouter } from 'react-router-dom' 
-import { createStore, compose } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import reducer from './reducers'
 
@@ -40,7 +41,9 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, reducer)
 
 const store = createStore(persistedReducer,
-    composeEnhancers()
+    composeEnhancers(
+        applyMiddleware(thunk)
+    )
 )
 
 const persistor = persistStore(store)
