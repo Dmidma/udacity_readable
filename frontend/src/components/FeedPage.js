@@ -32,7 +32,7 @@ class FeedPage extends Component {
                 <HeaderActionBar username={this.props.username} history={this.props.history} />
                 <br/>
             {
-                this.props.posts.ids.map(id => (<PostCard key={id} post={this.props.posts.id[id]} />))
+                this.props.postsIds.map(id => (<PostCard key={id} postId={id} />))
             }
             </div>
         )
@@ -42,7 +42,7 @@ class FeedPage extends Component {
 function mapStateToProps ({ loggedUser, posts }) {
     return {
         username: loggedUser.name,
-        posts: posts
+        postsIds: posts.ids
     }
 }
 

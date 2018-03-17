@@ -11,13 +11,11 @@ import { upVotePost, downVotePost } from '../actions/postsActions'
 class PostCard extends Component {
 
     handleUpVoteOnClick = () => {
-        this.props.upVotePost(this.props.post.id)
-        this.setState({})
+        this.props.upVotePost(this.props.postId)
     }
 
     handleDownVoteOnClick = () => {
-        this.props.downVotePost(this.props.post.id)
-        this.setState({})
+        this.props.downVotePost(this.props.postId)
     }
 
     render() {
@@ -31,6 +29,11 @@ class PostCard extends Component {
     }
 }
 
+function mapStateToProps ({ posts }, ownProps) {
+    return {
+        post: posts.id[ownProps.postId]
+    }
+}
 
 
 function mapDispatchToProps (dispatch) {
@@ -41,4 +44,4 @@ function mapDispatchToProps (dispatch) {
 }
 
 
-export default connect(null, mapDispatchToProps)(PostCard)
+export default connect(mapStateToProps, mapDispatchToProps)(PostCard)

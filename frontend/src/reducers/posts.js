@@ -28,8 +28,9 @@ export const posts = (state = initPosts, action) => {
             newState.ids = [...idsSet]
             return newState        
         case UPVOTE_POST:
-            state.id[action.id].voteScore += 1
-            return state
+            let upState = {...state}
+            upState.id[action.id].voteScore += 1
+            return upState
         case DOWNVOTE_POST:
             state.id[action.id].voteScore -= 1
             return state
