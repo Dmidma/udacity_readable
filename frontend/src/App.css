@@ -34,3 +34,13 @@
     margin-top: 100px;
     max-width: 40%;
 }
+
+
+.user-section {
+    margin-left: 10px;
+    font-family: 'Roboto, sans-serif';
+}
+
+.bigger {
+    font-size: 1.5em;
+}

@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import PropTypes from 'prop-types'
 
 import HeaderActionBarTemplate from '../templates/HeaderActionBarTemplate'
 
@@ -10,11 +11,11 @@ import { removeUser } from '../actions/loggedUserActions'
 
 class HeaderActionBar extends Component {
 
-    state = {
-        value: 3
+    static propTypes = {
+        history: PropTypes.object.isRequired,
+        username: PropTypes.string.isRequired
     }
-    
-    handleChange = (event, index, value) => this.setState({value})
+
 
     handleLogoutOnClik = () => {
         this.props.logout()
@@ -23,7 +24,7 @@ class HeaderActionBar extends Component {
 
     render() {
         return (
-            HeaderActionBarTemplate(this.handleChange, this.value, this.handleLogoutOnClik)
+            HeaderActionBarTemplate(this.props.username, this.handleLogoutOnClik)
         )
     }
 }

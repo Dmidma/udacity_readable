@@ -1,16 +1,21 @@
 import React, { Component } from 'react'
-
+import PropTypes from 'prop-types'
 
 // import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-// import { actionCreator } from '../actions'
-
 import HeaderActionBar from './HeaderActionBar'
 
 
+
 class FeedPage extends Component {
+    
+    static propTypes = {
+        history: PropTypes.object.isRequired
+    }
+
+
     componentWillMount() {
-        if (this.props.userName === null) {
+        if (this.props.username === null) {
             this.props.history.push("/login")
         }
     }
@@ -19,7 +24,7 @@ class FeedPage extends Component {
     render() {
         return (
             <div>
-                <HeaderActionBar history={this.props.history} />
+                <HeaderActionBar username={this.props.username} history={this.props.history} />
                 This is FeedPage component.
             </div>
         )
@@ -28,7 +33,7 @@ class FeedPage extends Component {
 
 function mapStateToProps ({ loggedUser }) {
     return {
-        userName: loggedUser.name
+        username: loggedUser.name
     }
 }
 
