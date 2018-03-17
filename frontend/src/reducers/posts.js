@@ -7,7 +7,6 @@ import {
 
 
 /**
- * id: is a map by id of the posts
  * ids: is an array of the available posts' id
  */
 const initPosts = {
@@ -21,20 +20,28 @@ export const posts = (state = initPosts, action) => {
             let newState = {...state}
             let idsSet = new Set(newState.ids)
             action.posts.forEach(post => {
-                newState.id[post.id] = post
+                newState[post.id] = post
                 idsSet.add(post.id)
             })
             newState.ids = [...idsSet]
             return newState        
         case UPVOTE_POST:
-    
-            state.id[action.id].voteScore += 1
-            return Object.assign({}, state)
-
+            return {
+                ...state,
+                [action.id]: {
+                    ...state[action.id], 
+                    voteScore: state[action.id].voteScore + 1
+                }
+            }
 
         case DOWNVOTE_POST:
-            state.id[action.id].voteScore -= 1
-            return state
+            return {
+                ...state,
+                [action.id]: {
+                    ...state[action.id], 
+                    voteScore: state[action.id].voteScore - 1
+                }
+            }
         default:
             return state
     }

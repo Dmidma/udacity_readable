@@ -31,7 +31,7 @@ class PostCard extends Component {
 
 function mapStateToProps ({ posts }, ownProps) {
     return {
-        post: posts.id[ownProps.postId]
+        post: posts[ownProps.postId]
     }
 }
 
