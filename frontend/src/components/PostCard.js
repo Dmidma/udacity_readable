@@ -3,9 +3,15 @@ import { Component } from 'react'
 import PostCardTemplate from '../templates/PostCardTemplate'
 
 
+// import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { upVotePost } from '../actions/postsActions'
+
+
 class PostCard extends Component {
     handleUpVoteOnClick = () => {
         console.log(`UpVote post(${this.props.post.id})`)
+        this.props.upVotePost(this.props.post.id)
     }
 
     handleDownVoteOnClick = () => {
@@ -23,4 +29,17 @@ class PostCard extends Component {
     }
 }
 
-export default PostCard
+function mapStateToProps ({ posts }) {
+    return {
+    }
+}
+
+function mapDispatchToProps (dispatch) {
+    return {
+        upVotePost: (id) => dispatch(upVotePost(id))
+    }
+}
+
+
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PostCard))
+export default connect(null, mapDispatchToProps)(PostCard)

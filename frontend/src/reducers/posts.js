@@ -1,5 +1,7 @@
 import {
-    ADD_POSTS
+    ADD_POSTS,
+    UPVOTE_POST,
+    DOWNVOTE_POST
 } from '../actions/postsActions'
 
 
@@ -25,6 +27,12 @@ export const posts = (state = initPosts, action) => {
             })
             newState.ids = [...idsSet]
             return newState        
+        case UPVOTE_POST:
+           let upState = {...state}
+
+            upState.id[action.id].voteScore += 1
+
+            return upState
         default:
             return state
     }
