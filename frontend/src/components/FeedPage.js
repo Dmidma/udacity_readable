@@ -27,7 +27,6 @@ class FeedPage extends Component {
         // removing the below line will result in props.username warning
         // TODO: Check how to stop rendering in componentWillMount
         if (this.props.username === null) return null
-        console.log("A render")
         return (
             <div>
                 <HeaderActionBar username={this.props.username} history={this.props.history} />

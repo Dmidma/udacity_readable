@@ -33,7 +33,6 @@ export const posts = (state = initPosts, action) => {
                     voteScore: state[action.id].voteScore + 1
                 }
             }
-
         case DOWNVOTE_POST:
             return {
                 ...state,

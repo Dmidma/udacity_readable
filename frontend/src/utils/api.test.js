@@ -1,4 +1,4 @@
-import '../extensions/setPrototypeExtending'
+import '../../extensions/setPrototypeExtension'
 import {
     getCategories,
     getPosts,

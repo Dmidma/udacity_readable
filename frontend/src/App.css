@@ -60,7 +60,7 @@
     margin: 1% auto;
     height: 100px;
     position: relative;
-    padding: 34px;
+    padding: 20px;
     color: #444;
     border: 0.09em solid #999999;
 }
@@ -92,4 +92,15 @@
 
 .content-section {
     margin-left: 3%;
+}
+
+
+.post-title {
+    text-decoration: none; 
+    font-size: 1.5em;
+    font-family: 'Roboto, sans-serif';
+    font-weight: normal;
+    margin-right: .4em;
+    overflow: hidden;
+
 }

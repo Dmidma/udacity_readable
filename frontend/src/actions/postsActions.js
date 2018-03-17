@@ -25,7 +25,7 @@ export const upVotePost = (id) => (dispatch) => {
 
 export const downVotePost = (id) => (dispatch) => {
     _downVotePost(id)
-        .then(data => downVotePostInStore(data))
+        .then(data => dispatch(downVotePostInStore(id)))
 }
 
 const upVotePostInStore = (id) => ({ type: UPVOTE_POST, id })

@@ -1,7 +1,9 @@
 import React from 'react'
-import {CardTitle} from 'material-ui/Card';
+
+import { Link } from 'react-router-dom'
+
 import FontIcon from 'material-ui/FontIcon'
-import { red500, greenA200 } from 'material-ui/styles/colors'
+import { blue500 } from 'material-ui/styles/colors'
 
 
 
@@ -12,6 +14,7 @@ const PostCardTemplate = (post, handleUpVote, handleDownVote) => {
     const currentDate = new Date(post.timestamp)
     const postDate = `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`
 
+    const postUrl = `/${post.category}/${post.id}`
 
     return (
 
@@ -19,8 +22,7 @@ const PostCardTemplate = (post, handleUpVote, handleDownVote) => {
         <div>
             <FontIcon
                 className="material-icons"
-                color={red500}
-                hoverColor={greenA200} 
+                hoverColor={blue500} 
                 onClick={handleUpVote}
             >
                     thumb_up
@@ -28,16 +30,14 @@ const PostCardTemplate = (post, handleUpVote, handleDownVote) => {
             <h3>{post.voteScore}</h3>
             <FontIcon
                 className="material-icons"
-                color={red500}
-                hoverColor={greenA200} 
+                hoverColor={blue500} 
                 onClick={handleDownVote}
             >
                     thumb_down
             </FontIcon>
         </div>
         <div className="content-section">
-        <CardTitle 
-            title={post.title} />
+        <Link className="post-title" to={postUrl} >{post.title}</Link>
         <p>
             Posted on {postDate} by {post.author} to {post.category}
         </p>

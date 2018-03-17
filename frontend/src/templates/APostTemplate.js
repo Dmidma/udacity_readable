@@ -11,9 +11,9 @@
 import React from 'react'
 
 
-const APostTemplate = () => (
+const APostTemplate = (category, postId) => (
     <div>
-        This is APost component
+        This is APost component for {postId} at category {category}
     </div>
 )
 

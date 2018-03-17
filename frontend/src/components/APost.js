@@ -6,7 +6,8 @@ import APostTemplate from '../templates/APostTemplate'
 class APost extends Component {
     render() {
         return (
-            APostTemplate()
+            APostTemplate(this.props.match.params.category, this.props.match.params.post_id)
+
         )
     }
 }
