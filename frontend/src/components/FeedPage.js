@@ -5,8 +5,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 // import { actionCreator } from '../actions'
 
+import HeaderActionBar from './HeaderActionBar'
 
-class LamePage extends Component {
+
+class FeedPage extends Component {
     componentWillMount() {
         if (this.props.userName === null) {
             this.props.history.push("/login")
@@ -17,7 +19,8 @@ class LamePage extends Component {
     render() {
         return (
             <div>
-                This is LamePage component.
+                <HeaderActionBar history={this.props.history} />
+                This is FeedPage component.
             </div>
         )
     }
@@ -36,5 +39,4 @@ function mapDispatchToProps (dispatch) {
 }
 
 
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LamePage))
-export default connect(mapStateToProps, mapDispatchToProps)(LamePage)
+export default connect(mapStateToProps, mapDispatchToProps)(FeedPage)
