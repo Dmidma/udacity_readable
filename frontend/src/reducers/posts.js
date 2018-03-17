@@ -11,7 +11,6 @@ import {
  * ids: is an array of the available posts' id
  */
 const initPosts = {
-    id: {},
     ids: []
 }
 
@@ -28,9 +27,11 @@ export const posts = (state = initPosts, action) => {
             newState.ids = [...idsSet]
             return newState        
         case UPVOTE_POST:
-            let upState = {...state}
-            upState.id[action.id].voteScore += 1
-            return upState
+    
+            state.id[action.id].voteScore += 1
+            return Object.assign({}, state)
+
+
         case DOWNVOTE_POST:
             state.id[action.id].voteScore -= 1
             return state
