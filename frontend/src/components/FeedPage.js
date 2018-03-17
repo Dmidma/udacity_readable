@@ -7,6 +7,8 @@ import HeaderActionBar from './HeaderActionBar'
 
 import { getPosts } from '../utils/api'
 
+import { addPosts } from '../actions/postsActions'
+
 class FeedPage extends Component {
     static propTypes = {
         history: PropTypes.object.isRequired
@@ -17,7 +19,9 @@ class FeedPage extends Component {
         if (this.props.username === null) {
             this.props.history.push("/login")
         } else {
-           getPosts().then(data => console.log(data)) 
+            getPosts().then(data => {
+                this.props.addPosts(data)
+            }) 
         }
     }
 
@@ -39,7 +43,7 @@ function mapStateToProps ({ loggedUser }) {
 
 function mapDispatchToProps (dispatch) {
     return {
-        // propsName: () => dispatch(actionCreator())
+       addPosts: (posts) => dispatch(addPosts(posts))
     }
 }
 
