@@ -8,6 +8,9 @@ import { getPosts } from '../utils/api'
 
 import { addPosts } from '../actions/postsActions'
 
+import { addCategories } from '../actions/categoriesActions'
+
+
 class FeedPage extends Component {
 
 
@@ -19,8 +22,9 @@ class FeedPage extends Component {
 
     componentDidMount() {
         getPosts().then(data => {
-            this.props.addPosts(data)
+            this.props.fetchPosts(data)
         }) 
+        this.props.fetchCategories()
     }
 
     render() {
@@ -48,7 +52,8 @@ function mapStateToProps ({ loggedUser, posts }) {
 
 function mapDispatchToProps (dispatch) {
     return {
-       addPosts: (posts) => dispatch(addPosts(posts))
+       fetchPosts: (posts) => dispatch(addPosts(posts)),
+       fetchCategories: () => dispatch(addCategories())
     }
 }
 
