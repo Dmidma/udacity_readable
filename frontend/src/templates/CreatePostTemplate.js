@@ -1,13 +1,27 @@
 import React from 'react'
+import TextField from 'material-ui/TextField'
+import FlatButton from 'material-ui/FlatButton'
+
 
 
 const CreatePostTemplate = (handleFormSubmit) => (
     <div>
-        This is CreatePost component
-        <form onSubmit={handleFormSubmit} >
-            <input name="input1" type="text" />
-            <input name="input2" type="text" />
-            <input name="submit" type="submit" />
+        <form className="max-width" onSubmit={handleFormSubmit} >
+            <TextField 
+                className="max-width"
+                hintText="Title"
+                floatingLabelText="Title"
+                name="title" />
+            <br/>
+            <TextField 
+                className="max-width"
+                hintText="Content"
+                floatingLabelText="Content"
+                name="content" 
+                multiLine={true}
+                rows={4}/>
+            <br/>
+            <FlatButton className="center-form-button" type="submit" label="Create Post" />
         </form>
     </div>
 )

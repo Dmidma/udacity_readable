@@ -31,6 +31,7 @@ const HeaderActionBarTemplate = (username, handleLogoutOnClik, handleCreatePostO
         </ToolbarGroup>
     </Toolbar>
     <Dialog
+        className="long-dialog"
         title="Create new Post"
         open={isOpen} 
         onRequestClose={handleCloseModel} > 

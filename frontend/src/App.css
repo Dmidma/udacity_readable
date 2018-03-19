@@ -104,3 +104,17 @@
     overflow: hidden;
 
 }
+
+.max-width {
+    width: 100% !important;
+}
+
+.center-form-button {
+    display: flex !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+
+.long-dialog {
+    overflow-y: auto;
+}
