@@ -8,7 +8,7 @@ import Page404 from './Page404'
 import LoginBox from './LoginBox'
 import FeedPage from './FeedPage'
 import APost from './APost'
-
+import CreatePost from './CreatePost'
 
 
 class App extends Component {
@@ -20,6 +20,7 @@ class App extends Component {
                 <Route exact path="/" component={FeedPage} />
                 <Route exact path="/login" component={LoginBox} />
                 <Route path="/:category/:post_id" component={APost} />
+                <Route exact path="/me-post" component={CreatePost} />
                 <Route component={Page404} />
             </Switch>
         </MuiThemeProvider>
