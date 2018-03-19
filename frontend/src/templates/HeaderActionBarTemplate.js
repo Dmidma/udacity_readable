@@ -35,7 +35,7 @@ const HeaderActionBarTemplate = (username, handleLogoutOnClik, handleCreatePostO
         title="Create new Post"
         open={isOpen} 
         onRequestClose={handleCloseModel} > 
-        <CreatePost />
+        <CreatePost closeModel={handleCloseModel} />
     </Dialog>
     </div>
 )

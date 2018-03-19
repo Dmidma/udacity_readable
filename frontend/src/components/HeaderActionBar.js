@@ -26,19 +26,15 @@ class HeaderActionBar extends Component {
         this.props.history.push("/login")
     }
 
-    handleCreatePostOnClick = () => {
-        console.log("click!")
-        this.setState((oldState) => ({ isOpen: !oldState.isOpen }))
-    }
-
-    handleCloseModel = () => { this.setState({ isOpen: false }) }
+    handleOpenModel = () => this.setState({ isOpen: true })
+    handleCloseModel = () => this.setState({ isOpen: false })
 
     render() {
         return (
             HeaderActionBarTemplate(
                 this.props.username, 
                 this.handleLogoutOnClik,
-                this.handleCreatePostOnClick,
+                this.handleOpenModel,
                 this.state.isOpen,
                 this.handleCloseModel)
         )
