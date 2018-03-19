@@ -16,16 +16,38 @@ class HeaderActionBar extends Component {
         username: PropTypes.string.isRequired
     }
 
+    state = {
+        isOpen: false
+    }
+
 
     handleLogoutOnClik = () => {
         this.props.logout()
         this.props.history.push("/login")
     }
 
+    handleCreatePostOnClick = () => {
+        console.log("click!")
+        this.setState((oldState) => ({ isOpen: !oldState.isOpen }))
+    }
+
+    handleCloseModel = () => { this.setState({ isOpen: false }) }
+
     render() {
         return (
-            HeaderActionBarTemplate(this.props.username, this.handleLogoutOnClik)
+            HeaderActionBarTemplate(
+                this.props.username, 
+                this.handleLogoutOnClik,
+                this.handleCreatePostOnClick,
+                this.state.isOpen,
+                this.handleCloseModel)
         )
+    }
+}
+
+function mapStateToProps({ loggedUser }) {
+    return {
+        username: loggedUser.name
     }
 }
 
@@ -38,4 +60,4 @@ function mapDispatchToProps (dispatch) {
 
 
 // export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderActionBar))
-export default connect(null, mapDispatchToProps)(HeaderActionBar)
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderActionBar)

@@ -13,31 +13,25 @@ import { addCategories } from '../actions/categoriesActions'
 
 class FeedPage extends Component {
 
-
-    componentWillMount() {
+    componentDidMount() {
         if (this.props.username === null) {
             this.props.history.push("/login")
+        } else {
+            getPosts().then(data => {
+                this.props.fetchPosts(data)
+            }) 
+            this.props.fetchCategories()
         }
     }
 
-    componentDidMount() {
-        getPosts().then(data => {
-            this.props.fetchPosts(data)
-        }) 
-        this.props.fetchCategories()
-    }
 
     render() {
-        // removing the below line will result in props.username warning
-        // TODO: Check how to stop rendering in componentWillMount
         if (this.props.username === null) return null
         return (
             <div>
-                <HeaderActionBar username={this.props.username} history={this.props.history} />
+                <HeaderActionBar history={this.props.history} />
                 <br/>
-            {
-                this.props.postsIds.map(id => (<PostCard key={id} postId={id} />))
-            }
+                    { this.props.postsIds.map(id => (<PostCard key={id} postId={id} />)) }
             </div>
         )
     }
