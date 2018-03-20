@@ -6,18 +6,18 @@ import AutoComplete from 'material-ui/AutoComplete'
 
 const CreatePostTemplate = (handleFormSubmit, categories, isAvailable) => (
     <div>
-        <form className="max-width" onSubmit={handleFormSubmit} >
+        <form onSubmit={handleFormSubmit} >
             <TextField 
-                className="max-width"
                 hintText="Title"
+                fullWidth={true}
                 floatingLabelText="Title"
                 name="title" />
             <br/>
             <TextField 
-                className="max-width"
                 hintText="Content"
                 floatingLabelText="Content"
                 name="content" 
+                fullWidth={true}
                 multiLine={true}
                 rows={4}/>
             <br/>
@@ -40,6 +40,7 @@ const CreatePostTemplate = (handleFormSubmit, categories, isAvailable) => (
             <AutoComplete
                 hintText="Category"
                 floatingLabelText="Category"
+                fullWidth={true}
                 name="category"
                 dataSource={categories}
                 />)
