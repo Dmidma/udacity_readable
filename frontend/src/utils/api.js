@@ -2,13 +2,10 @@ import uuidv1 from 'uuid/v1'
 
 const api = "http://localhost:3001"
 
-let token = localStorage.token
-if (!token)
-    token =  Math.random().toString(36).substr(-8)
 
 const headers = {
     'Accept': 'application/json',
-    'Authorization': token
+    'Authorization': 'THIS-A-TOKEN'
 }
 
 /**
