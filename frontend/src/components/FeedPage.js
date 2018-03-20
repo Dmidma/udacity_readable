@@ -29,7 +29,7 @@ class FeedPage extends Component {
         if (this.props.username === null) return null
         return (
             <div>
-                <HeaderActionBar history={this.props.history}   />
+                <HeaderActionBar />
                 <br/>
                 <br/>
                 <br/>

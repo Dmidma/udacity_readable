@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import HeaderActionBarTemplate from '../templates/HeaderActionBarTemplate'
 
 
-// import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeUser } from '../actions/loggedUserActions'
 
@@ -57,4 +57,4 @@ function mapDispatchToProps (dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderActionBar)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderActionBar))
