@@ -48,7 +48,7 @@ export const posts = (state = initPosts, action) => {
             return {
                 ...state,
                 [action.post.id]: action.post,
-                ids: newIds
+                ids: [...newIds]
             }
         default:
             return state
