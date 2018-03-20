@@ -37,12 +37,17 @@ const PostCardTemplate = (post, handleUpVote, handleDownVote) => {
             </FontIcon>
         </div>
         <div className="content-section">
-        <Link className="post-title" to={postUrl} >{post.title}</Link>
+        <Link className="post-title" to={postUrl} >
+            {post.title}
+        </Link>
         <p>
             Posted on {postDate} by {post.author} to {post.category}
         </p>
 
-            <a href="/love"> {post.commentCount} Comments </a>
+        <Link to={{
+            pathname: postUrl,
+            hash: '#comments'
+        }} > {post.commentCount} Comments </Link>
         </div>
       </div>
     )
