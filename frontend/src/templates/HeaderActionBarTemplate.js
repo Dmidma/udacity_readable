@@ -7,13 +7,21 @@ import MenuItem from 'material-ui/MenuItem'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
 import CreatePost from '../components/CreatePost'
+import FontIcon from 'material-ui/FontIcon'
+import { blue500 } from 'material-ui/styles/colors'
 
 
-
-const HeaderActionBarTemplate = (username, handleLogoutOnClik, handleCreatePostOnClick, isOpen, handleCloseModel) => (
+const HeaderActionBarTemplate = (username, handleLogoutOnClik, handleCreatePostOnClick, isOpen, handleCloseModel, openDrawer) => (
     <div>
     <Toolbar className="sticky-toolbar">
         <ToolbarGroup firstChild={true}>
+        <FontIcon
+            className="material-icons"
+            hoverColor={blue500} 
+            onClick={openDrawer}
+        >
+            menu
+        </FontIcon>
             <p className="user-section">Welcome</p> <h4 className="user-section bigger">{username}</h4>
         </ToolbarGroup>
         <ToolbarGroup>

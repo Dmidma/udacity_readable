@@ -36,7 +36,8 @@ class HeaderActionBar extends Component {
                 this.handleLogoutOnClik,
                 this.handleOpenModel,
                 this.state.isOpen,
-                this.handleCloseModel)
+                this.handleCloseModel,
+                this.props.openDrawer)
         )
     }
 }
