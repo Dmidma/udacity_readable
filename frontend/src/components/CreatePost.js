@@ -7,7 +7,8 @@ import CreatePostTemplate from '../templates/CreatePostTemplate'
 
 // import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-// import { actionCreator } from '../actions'
+import { createPost as actionCreatePost } from '../actions/postsActions'
+
 
 class CreatePost extends Component {
 
@@ -33,10 +34,12 @@ class CreatePost extends Component {
             this.setState({ isAvailable: true })
         }
         
-        console.log("Author", this.props.username)
-        console.log(values)
-        console.log("Categories", this.props.categories)
-        // this allow to close model
+        this.props.persistPost(
+            values.title,
+            values.content,
+            this.props.username,
+            values.category
+        )
         this.props.closeModel()
     }
 
@@ -59,7 +62,7 @@ function mapStateToProps ({ loggedUser, categories }) {
 
 function mapDispatchToProps (dispatch) {
     return {
-        // propsName: () => dispatch(actionCreator())
+        persistPost: (title, body, author, category) => dispatch(actionCreatePost(title, body, author, category))
     }
 }
 
