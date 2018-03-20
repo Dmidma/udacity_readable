@@ -17,8 +17,15 @@ class HeaderActionBar extends Component {
     }
 
     state = {
-        isOpen: false
+        isPostDialogOpen: false,
+        isDrawerOpen: false
     }
+
+    openPostDialog = () => this.setState({ isPostDialogOpen: true })
+    closePostDialog = () => this.setState({ isPostDialogOpen: false })
+
+    openDrawer = () => this.setState({ isDrawerOpen: true })
+    closeDrawer = () => this.setState({ isDrawerOpen: false })
 
 
     handleLogoutOnClik = () => {
@@ -26,18 +33,12 @@ class HeaderActionBar extends Component {
         this.props.history.push("/login")
     }
 
-    handleOpenModel = () => this.setState({ isOpen: true })
-    handleCloseModel = () => this.setState({ isOpen: false })
-
     render() {
         return (
             HeaderActionBarTemplate(
-                this.props.username, 
-                this.handleLogoutOnClik,
-                this.handleOpenModel,
-                this.state.isOpen,
-                this.handleCloseModel,
-                this.props.openDrawer)
+                this.props.username, this.handleLogoutOnClik,
+                this.state.isPostDialogOpen, this.openPostDialog, this.closePostDialog,
+                this.state.isDrawerOpen, this.openDrawer, this.closeDrawer)
         )
     }
 }
@@ -56,5 +57,4 @@ function mapDispatchToProps (dispatch) {
 }
 
 
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HeaderActionBar))
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderActionBar)

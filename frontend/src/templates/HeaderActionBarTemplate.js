@@ -9,9 +9,15 @@ import Dialog from 'material-ui/Dialog'
 import CreatePost from '../components/CreatePost'
 import FontIcon from 'material-ui/FontIcon'
 import { blue500 } from 'material-ui/styles/colors'
+import Drawer from 'material-ui/Drawer'
+import AppBar from 'material-ui/AppBar'
+import NavigationClose from 'material-ui/svg-icons/navigation/close'
 
 
-const HeaderActionBarTemplate = (username, handleLogoutOnClik, handleCreatePostOnClick, isOpen, handleCloseModel, openDrawer) => (
+const HeaderActionBarTemplate = (
+    username, handleLogout, 
+    isPostDialogOpen, openPostDialog, closePostDialog,
+    isDrawerOpen, openDrawer, closeDrawer) => (
     <div>
     <Toolbar className="sticky-toolbar">
         <ToolbarGroup firstChild={true}>
@@ -25,7 +31,7 @@ const HeaderActionBarTemplate = (username, handleLogoutOnClik, handleCreatePostO
             <p className="user-section">Welcome</p> <h4 className="user-section bigger">{username}</h4>
         </ToolbarGroup>
         <ToolbarGroup>
-            <RaisedButton label="Create Post" primary={true} onClick={handleCreatePostOnClick} />
+            <RaisedButton label="Create Post" primary={true} onClick={openPostDialog} />
             <ToolbarSeparator />
             <IconMenu
             iconButtonElement={
@@ -34,17 +40,27 @@ const HeaderActionBarTemplate = (username, handleLogoutOnClik, handleCreatePostO
                 </IconButton>
             }
             >
-                <MenuItem primaryText="Logout" onClick={handleLogoutOnClik} />
+                <MenuItem primaryText="Logout" onClick={handleLogout} />
             </IconMenu>
         </ToolbarGroup>
     </Toolbar>
     <Dialog
         className="long-dialog"
         title="Create new Post"
-        open={isOpen} 
-        onRequestClose={handleCloseModel} > 
-        <CreatePost closeModel={handleCloseModel} />
+        open={isPostDialogOpen} 
+        onRequestClose={closePostDialog} > 
+        <CreatePost closeModel={closePostDialog} />
     </Dialog>
+
+    <Drawer 
+        open={isDrawerOpen} >
+        <AppBar 
+            title="Categories" 
+            iconElementLeft={<IconButton><NavigationClose onClick={closeDrawer} /></IconButton>}
+/>
+        <MenuItem>Redux</MenuItem>
+        <MenuItem>React</MenuItem>
+    </Drawer>
     </div>
 )
 
