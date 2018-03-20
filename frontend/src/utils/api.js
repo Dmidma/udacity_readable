@@ -5,7 +5,7 @@ const api = "http://localhost:3001"
 
 const headers = {
     'Accept': 'application/json',
-    'Authorization': 'THIS-A-TOKEN'
+    'Authorization': 'THIS-IS-A-TOKEN'
 }
 
 /**
