@@ -3,8 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import HeaderActionBar from './HeaderActionBar'
 import PostCard from './PostCard'
-import SelectField from 'material-ui/SelectField'
-import MenuItem from 'material-ui/MenuItem'
+import SortBox from './SortBox'
 
 import { getPosts } from '../utils/api'
 
@@ -15,9 +14,8 @@ import { addCategories } from '../actions/categoriesActions'
 
 class FeedPage extends Component {
 
-    sortArray = ["best", "worst", "new", "old"]
     state = {
-        sort: 1
+        sort: "best"
     }
     
     componentDidMount() {
@@ -26,8 +24,10 @@ class FeedPage extends Component {
         } else {
             let sort = this.props.match.params.sort
             if (sort === undefined) sort = "best"
-            this.setState({ sort: this.sortArray.indexOf(sort) + 1 })
-            if (sort !== "best") this.props.setPostSorting(sort)
+            if (sort !== "best") {
+                this.props.setPostSorting(sort)
+                this.setState({ sort })
+            }
             getPosts().then(data => {
                 this.props.fetchPosts(data)
             }) 
@@ -35,29 +35,13 @@ class FeedPage extends Component {
         }
     }
     
-    handleSortChanging = (e, i, v) => {
-        this.props.history.push(`/feed/${this.sortArray[v - 1]}`)
-        // to rerender the whole page
-        window.location.reload()
-    }
-
-
     render() {
         if (this.props.username === null) return null
+        console.log(this.state.sort)
         return (
             <div>
-                <HeaderActionBar />
-                <SelectField
-                  className="sort-box"
-                  floatingLabelText="Sort by:"
-                  value={this.state.sort}
-                  onChange={this.handleSortChanging}
-                >
-                  <MenuItem value={1} primaryText="best" />
-                  <MenuItem value={2} primaryText="worst" />
-                  <MenuItem value={3} primaryText="new" />
-                  <MenuItem value={4} primaryText="old" />
-                </SelectField>
+                <HeaderActionBar  />
+                <SortBox sort={this.state.sort} />
                 { this.props.postsIds.map(id => (<PostCard key={id} postId={id} />)) }
             </div>
         )
