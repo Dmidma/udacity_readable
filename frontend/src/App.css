@@ -118,3 +118,9 @@
 .long-dialog {
     overflow-y: auto;
 }
+
+.sort-box {
+    margin-left: 50px;
+    margin-top: 70px;
+    margin-bottom: 30px;
+}
