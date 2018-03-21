@@ -1,9 +1,7 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 
-// import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-// import { actionCreator } from '../actions'
 
 class RootURL extends Component {
 
@@ -15,9 +13,7 @@ class RootURL extends Component {
         }
     }
 
-    render() {
-        return null
-    }
+    render = () => null
 }
 
 function mapStateToProps ({ loggedUser}) {
@@ -26,12 +22,6 @@ function mapStateToProps ({ loggedUser}) {
     }
 }
 
-function mapDispatchToProps (dispatch) {
-    return {
-        // propsName: () => dispatch(actionCreator())
-    }
-}
 
 
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(RootURL))
-export default connect(mapStateToProps, mapDispatchToProps)(RootURL)
+export default connect(mapStateToProps)(RootURL)
