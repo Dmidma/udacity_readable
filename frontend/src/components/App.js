@@ -8,7 +8,7 @@ import Page404 from './Page404'
 import LoginBox from './LoginBox'
 import FeedPage from './FeedPage'
 import APost from './APost'
-import TestCompo from './TestCompo'
+import RootURL from './RootURL'
 
 
 class App extends Component {
@@ -18,16 +18,16 @@ class App extends Component {
     return (
         <MuiThemeProvider> 
             <Switch>
-                <Route exact path="/" component={FeedPage} />
-                <Route exact path="/feed" component={TestCompo} />
-                <Route exact path="/feed/:sort(top|bottom|old|new)" component={TestCompo} />
+                <Route exact path="/" component={RootURL} />
                 <Route exact path="/login" component={LoginBox} />
+                <Route exact path="/feed" component={FeedPage} />
+                <Route exact path="/feed/:sort(top|bottom|old|new)" component={FeedPage} />
                 <Route path="/c/:category/:post_id" component={APost} />
                 <Route component={Page404} />
             </Switch>
         </MuiThemeProvider>
 
-    );
+    )
   }
 }
 
