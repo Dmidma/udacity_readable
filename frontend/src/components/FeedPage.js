@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import HeaderActionBar from './HeaderActionBar'
 import PostCard from './PostCard'
 import SortBox from './SortBox'
+import Pagination from './Pagination'
 
 import { getPosts } from '../utils/api'
 
@@ -11,6 +12,8 @@ import { addPosts, setSort } from '../actions/postsActions'
 
 import { addCategories } from '../actions/categoriesActions'
 import { parse } from 'qs'
+
+
 
 class FeedPage extends Component {
 
@@ -53,6 +56,14 @@ class FeedPage extends Component {
 
         return subPosts.map(id => (<PostCard key={id} postId={id} />))
     }
+
+    handleNext = () => {
+        this.setState((oldState) => ({ page: oldState.page + 1 }))
+    }
+
+    handlePrev = () => {
+        this.setState((oldState) => ({ page: oldState.page - 1 }))
+    }
     
     render() {
         if (this.props.username === null) return null
@@ -61,6 +72,13 @@ class FeedPage extends Component {
                 <HeaderActionBar  />
                 <SortBox sort={this.state.sort} />
                 { this.getPostsForPage(this.state.page) }
+                <Pagination 
+                    page={this.state.page} 
+                    finalPage={Math.ceil(this.props.postsIds.length / 3)}
+                    handleNext={this.handleNext.bind(this)}
+                    handlePrev={this.handlePrev.bind(this)}
+                     
+                />
             </div>
         )
     }
