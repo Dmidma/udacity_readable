@@ -11,8 +11,8 @@ const SortBoxTemplate = (handleSortChanging, sortValue) => (
     >
         <MenuItem value={1} primaryText="best" />
         <MenuItem value={2} primaryText="worst" />
-        <MenuItem value={3} primaryText="new" />
-        <MenuItem value={4} primaryText="old" />
+        <MenuItem value={3} primaryText="newest" />
+        <MenuItem value={4} primaryText="oldest" />
     </SelectField>
 )
 

@@ -58,7 +58,7 @@ export const posts = (state = initPosts, action) => {
                 ids: [...newIds]
             }
         case SET_SORT:
-            const sortMethods = new Set(["best", "worst", "old", "new"])
+            const sortMethods = new Set(["best", "worst", "oldest", "newest"])
             let defaultSort = "best"
             if (sortMethods.has(action.sort))
                 defaultSort = action.sort 

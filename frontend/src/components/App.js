@@ -20,7 +20,7 @@ class App extends Component {
             <Switch>
                 <Route exact path="/" component={RootURL} />
                 <Route exact path="/login" component={LoginBox} />
-                <Route exact path="/feed/:sort(best|worst|old|new)?" component={FeedPage} />
+                <Route exact path="/feed/:sort(best|worst|oldest|newest)?" component={FeedPage} />
                 <Route exact path="/c/:category/" component={FeedPage} />
                 <Route path="/c/:category/:post_id" component={APost} />
                 <Route component={Page404} />

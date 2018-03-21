@@ -12,7 +12,7 @@ class SortBox extends Component {
     } 
 
 
-    sortArray = ["best", "worst", "new", "old"]
+    sortArray = ["best", "worst", "newest", "oldest"]
     state = {
         sort: 1
     }
