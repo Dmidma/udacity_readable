@@ -6,7 +6,7 @@ import PostCard from './PostCard'
 
 import { getPosts } from '../utils/api'
 
-import { addPosts } from '../actions/postsActions'
+import { addPosts, setSort } from '../actions/postsActions'
 
 import { addCategories } from '../actions/categoriesActions'
 
@@ -14,7 +14,10 @@ import { addCategories } from '../actions/categoriesActions'
 class FeedPage extends Component {
     
     componentDidMount() {
-        console.log(this.props.match.params.sort)
+        
+        const sort = this.props.match.params.sort
+        if (sort !== undefined && sort !== "best")
+            this.props.setPostSorting(sort)
 
         if (this.props.username === null) {
             this.props.history.push("/")
@@ -58,6 +61,7 @@ function mapStateToProps ({ loggedUser, posts }) {
 function mapDispatchToProps (dispatch) {
     return {
        fetchPosts: (posts) => dispatch(addPosts(posts)),
+       setPostSorting: (sort) => dispatch(setSort(sort)),
        fetchCategories: () => dispatch(addCategories())
     }
 }

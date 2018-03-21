@@ -2,7 +2,8 @@ import {
     ADD_POSTS,
     UPVOTE_POST,
     DOWNVOTE_POST,
-    ADD_NEW_POST
+    ADD_NEW_POST,
+    SET_SORT
 } from '../actions/postsActions'
 
 
@@ -28,11 +29,8 @@ export const posts = (state = initPosts, action) => {
                 idsSet.add(post.id)
             })
             let sortArray = [...idsSet]
-            sortArray.sort((id1, id2) => {
-                if (newState[id1].voteScore > newState[id2].voteScore) return -1
-                else if (newState[id1].voteScore < newState[id2].voteScore) return 1
-                else return 0
-            })
+
+            sortPosts(newState, sortArray, state.sort)
             newState.ids = [...sortArray]
             return newState        
         case UPVOTE_POST:
@@ -59,7 +57,27 @@ export const posts = (state = initPosts, action) => {
                 [action.post.id]: action.post,
                 ids: [...newIds]
             }
+        case SET_SORT:
+            const sortMethods = new Set(["best", "worst", "old", "new"])
+            let defaultSort = "best"
+            if (sortMethods.has(action.sort))
+                defaultSort = action.sort 
+            return {
+                ...state,
+                sort: defaultSort
+            }
         default:
             return state
     }
+}
+
+const sortPosts = (posts ,ids, sort) => {
+    let sortKey = "voteScore"
+    let order = 1
+    if (sort === "old" || sort === "new") sortKey = "timestamp"
+    if (sort === "old" || sort === "worst") order *= -1
+
+    ids.sort((id1, id2) => {
+        return (posts[id1][sortKey] > posts[id2][sortKey])? -1 * order: order
+    })
 }

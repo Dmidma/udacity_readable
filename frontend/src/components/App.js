@@ -22,7 +22,6 @@ class App extends Component {
                 <Route exact path="/login" component={LoginBox} />
                 <Route exact path="/feed" component={FeedPage} />
                 <Route exact path="/feed/:sort(best|worst|old|new)" component={FeedPage} />
-               // used to display posts for a specific category 
                 <Route exact path="/c/:category/" component={FeedPage} />
                 <Route path="/c/:category/:post_id" component={APost} />
                 <Route component={Page404} />

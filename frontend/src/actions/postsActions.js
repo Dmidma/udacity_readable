@@ -11,6 +11,7 @@ export const ADD_POSTS = 'ADD_POSTS'
 export const UPVOTE_POST = 'UPVOTE_POST'
 export const DOWNVOTE_POST = 'DOWNVOTE_POST'
 export const ADD_NEW_POST = 'ADD_NEW_POST'
+export const SET_SORT = 'SET_SORT'
 
 
 // posts is an array
@@ -39,3 +40,5 @@ export const downVotePost = (id) => (dispatch) => {
 const upVotePostInStore = (id) => ({ type: UPVOTE_POST, id })
 const downVotePostInStore = (id) => ({ type: DOWNVOTE_POST, id })
 
+
+export const setSort = (sort) => ({ type: SET_SORT, sort })
