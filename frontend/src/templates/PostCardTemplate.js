@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 import FontIcon from 'material-ui/FontIcon'
 import { blue500 } from 'material-ui/styles/colors'
+import UpdatePostBox from '../components/UpdatePostBox'
 
 
 
@@ -49,22 +50,7 @@ const PostCardTemplate = (post, handleUpVote, handleDownVote, isPostedByLoggedUs
             hash: '#comments'
         }} > {post.commentCount} Comments </Link>
         {isPostedByLoggedUser &&
-            <div className="update-section">
-
-            <FontIcon
-                className="material-icons"
-                hoverColor={blue500} 
-            >
-                    mode_edit
-            </FontIcon>
-
-            <FontIcon
-                className="material-icons"
-                hoverColor={blue500} 
-            >
-                    delete
-            </FontIcon>
-            </div>
+            <UpdatePostBox postId={post.id} />
         }
         </div>
       </div>
