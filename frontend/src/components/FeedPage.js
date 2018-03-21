@@ -24,10 +24,10 @@ class FeedPage extends Component {
         if (this.props.username === null) {
             this.props.history.push("/")
         } else {
-            const sort = this.props.match.params.sort
-            this.setState({ sort: this.mapSortToValue(sort) })
-            if (sort !== undefined && sort !== "best")
-            this.props.setPostSorting(sort)
+            let sort = this.props.match.params.sort
+            if (sort === undefined) sort = "best"
+            this.setState({ sort: this.sortArray.indexOf(sort) + 1 })
+            if (sort !== "best") this.props.setPostSorting(sort)
             getPosts().then(data => {
                 this.props.fetchPosts(data)
             }) 
@@ -35,19 +35,6 @@ class FeedPage extends Component {
         }
     }
     
-    mapSortToValue = (sort) => {
-        switch (sort) {
-            case "worst":
-                return 2
-            case "new":
-                return 3
-            case "old":
-                return 4
-            default:
-                return 1
-        }
-    }
-
     handleSortChanging = (e, i, v) => {
         this.props.history.push(`/feed/${this.sortArray[v - 1]}`)
         // to rerender the whole page
