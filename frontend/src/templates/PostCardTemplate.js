@@ -8,7 +8,7 @@ import { blue500 } from 'material-ui/styles/colors'
 
 
 
-const PostCardTemplate = (post, handleUpVote, handleDownVote) => {
+const PostCardTemplate = (post, handleUpVote, handleDownVote, isPostedByLoggedUser) => {
     
 
     const currentDate = new Date(post.timestamp)
@@ -48,6 +48,24 @@ const PostCardTemplate = (post, handleUpVote, handleDownVote) => {
             pathname: postUrl,
             hash: '#comments'
         }} > {post.commentCount} Comments </Link>
+        {isPostedByLoggedUser &&
+            <div className="update-section">
+
+            <FontIcon
+                className="material-icons"
+                hoverColor={blue500} 
+            >
+                    mode_edit
+            </FontIcon>
+
+            <FontIcon
+                className="material-icons"
+                hoverColor={blue500} 
+            >
+                    delete
+            </FontIcon>
+            </div>
+        }
         </div>
       </div>
     )

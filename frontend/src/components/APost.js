@@ -14,7 +14,8 @@ import { connect } from 'react-redux'
 class APost extends Component {
 
     state = {
-        post: {}
+        post: {},
+        isPostedByLoggedUser: false
     }
 
 
@@ -26,6 +27,9 @@ class APost extends Component {
         }
         
         getPostById(this.props.match.params.post_id).then(post => {
+            if (post.author === this.props.username) {
+                this.setState({ isPostedByLoggedUser: true })
+            }
             if (post.category !== this.props.match.params.category) {
                 this.props.history.replace("/pagenotfound")
             } else {
