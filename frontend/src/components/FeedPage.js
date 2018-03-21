@@ -26,12 +26,13 @@ class FeedPage extends Component {
         if (this.props.username === null) {
             this.props.history.push("/")
         } else {
-
             const queryString = this.props.history.location.search
             if (queryString) {
                 const queryObj = parse(queryString, { ignoreQueryPrefix: true })
                 if (queryObj.page) {
-                    this.setState({ page: queryObj.page })
+                    const pageNbr = Number(queryObj.page)
+                    if (!isNaN(pageNbr))
+                        this.setState({ page: pageNbr })
                 }
             }
 
@@ -56,13 +57,14 @@ class FeedPage extends Component {
 
         return subPosts.map(id => (<PostCard key={id} postId={id} />))
     }
-
-    handleNext = () => {
-        this.setState((oldState) => ({ page: oldState.page + 1 }))
-    }
-
-    handlePrev = () => {
-        this.setState((oldState) => ({ page: oldState.page - 1 }))
+    
+    // @direction: clicking next/prev
+    // next: 1
+    // prev: -1
+    handlePaginationButtons = (direction) => () => {
+        const curretPage = this.state.page + direction
+        this.setState((oldState) => ({ page: oldState.page + direction }))
+        this.props.history.push("?page=" + curretPage)
     }
     
     render() {
@@ -75,8 +77,8 @@ class FeedPage extends Component {
                 <Pagination 
                     page={this.state.page} 
                     finalPage={Math.ceil(this.props.postsIds.length / 3)}
-                    handleNext={this.handleNext.bind(this)}
-                    handlePrev={this.handlePrev.bind(this)}
+                    handleNext={this.handlePaginationButtons(1).bind(this)}
+                    handlePrev={this.handlePaginationButtons(-1).bind(this)}
                      
                 />
             </div>

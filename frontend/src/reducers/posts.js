@@ -74,8 +74,8 @@ export const posts = (state = initPosts, action) => {
 const sortPosts = (posts ,ids, sort) => {
     let sortKey = "voteScore"
     let order = 1
-    if (sort === "old" || sort === "new") sortKey = "timestamp"
-    if (sort === "old" || sort === "worst") order *= -1
+    if (sort === "oldest" || sort === "newest") sortKey = "timestamp"
+    if (sort === "oldest" || sort === "worst") order *= -1
 
     ids.sort((id1, id2) => {
         return (posts[id1][sortKey] > posts[id2][sortKey])? -1 * order: order
