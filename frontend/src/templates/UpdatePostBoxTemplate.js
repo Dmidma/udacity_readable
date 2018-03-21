@@ -4,7 +4,7 @@ import Dialog from 'material-ui/Dialog'
 import { blue500 } from 'material-ui/styles/colors'
 import FlatButton from 'material-ui/FlatButton'
 
-const UpdatePostBoxTemplate = (handleEdit, handleDelete, confirmMessage, isConfirmOpen, closeConfirmDialog) => {
+const UpdatePostBoxTemplate = (handleEdit, handleDelete, confirmMessage, isConfirmOpen, closeConfirmDialog, handleAcceptAction) => {
     const actions = [
       <FlatButton
         label="No"
@@ -15,9 +15,9 @@ const UpdatePostBoxTemplate = (handleEdit, handleDelete, confirmMessage, isConfi
         label="Yes"
         primary={true}
         keyboardFocused={true}
-        onClick={closeConfirmDialog}
-      />,
-    ];
+        onClick={handleAcceptAction}
+      />
+    ]
     return (
         <div className="update-section">
             <FontIcon

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 // import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-// import { actionCreator } from '../actions'
+import { deletePost } from '../actions/postsActions'
 
 class UpdatePostBox extends Component {
 
@@ -17,27 +17,46 @@ class UpdatePostBox extends Component {
     
     state = {
         isConfirmOpen: false,
-        confirmMessage: ''
+        confirmMessage: '',
+        action: 1 // 0: for editing, 1: for deleting
     }
 
     closeConfirmDialog = () => this.setState({ isConfirmOpen: false })
     openConfirmDialog = () => this.setState({ isConfirmOpen: true })
 
+    setEditAsAction = () => this.setState({ action: 0})
+    setDeleteAsAction = () => this.setState({ action: 1})
+
     handleEdit = () => {
         this.setConfirmMessage("edit")
+        this.setEditAsAction()
         this.openConfirmDialog()
     }
 
     handleDelete = () => {
         this.setConfirmMessage("delete")
+        this.setDeleteAsAction()
         this.openConfirmDialog()
+    }
+
+    handleAcceptAction = () => {
+        switch (this.state.action) {
+            case 0:
+                console.log("Confirmed Editing")
+            break;
+            case 1:
+                this.props.deletePost(this.props.postId)
+            break;
+            default:
+        }
+        this.closeConfirmDialog()
     }
 
     setConfirmMessage = (action) => this.setState({ confirmMessage: `Are you sure you to ${action} post: "${this.props.postTitle}"?` }) 
 
     render() {
         return (
-            UpdatePostBoxTemplate(this.handleEdit, this.handleDelete, this.state.confirmMessage, this.state.isConfirmOpen, this.closeConfirmDialog)
+            UpdatePostBoxTemplate(this.handleEdit, this.handleDelete, this.state.confirmMessage, this.state.isConfirmOpen, this.closeConfirmDialog, this.handleAcceptAction)
         )
     }
 }
@@ -50,7 +69,7 @@ function mapStateToProps ({ posts }, ownProps) {
 
 function mapDispatchToProps (dispatch) {
     return {
-        // propsName: () => dispatch(actionCreator())
+        deletePost: (postId) => dispatch(deletePost(postId))
     }
 }
 

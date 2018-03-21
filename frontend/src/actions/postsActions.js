@@ -1,7 +1,8 @@
 import {
     upVotePost as _upVotePost,
     downVotePost as _downVotePost,
-    addAPost as _addAPost
+    addAPost as _addAPost,
+    deletePost as _deletePost
 } from '../utils/api'
 
 
@@ -12,6 +13,7 @@ export const UPVOTE_POST = 'UPVOTE_POST'
 export const DOWNVOTE_POST = 'DOWNVOTE_POST'
 export const ADD_NEW_POST = 'ADD_NEW_POST'
 export const SET_SORT = 'SET_SORT'
+export const DELETE_POST = 'DELETE_POST'
 
 
 // posts is an array
@@ -42,3 +44,13 @@ const downVotePostInStore = (id) => ({ type: DOWNVOTE_POST, id })
 
 
 export const setSort = (sort) => ({ type: SET_SORT, sort })
+
+
+export const deletePost = (id) => (dispatch) => {  
+   _deletePost(id)
+    .then(data => dispatch(deletePostInStore(id)))
+}
+
+const deletePostInStore = (postId) => ({ type: DELETE_POST, postId })
+
+

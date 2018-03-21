@@ -3,7 +3,8 @@ import {
     UPVOTE_POST,
     DOWNVOTE_POST,
     ADD_NEW_POST,
-    SET_SORT
+    SET_SORT,
+    DELETE_POST
 } from '../actions/postsActions'
 
 
@@ -66,6 +67,9 @@ export const posts = (state = initPosts, action) => {
                 ...state,
                 sort: defaultSort
             }
+        case DELETE_POST:
+            state[action.postId].deleted = true
+            return { ...state }
         default:
             return state
     }

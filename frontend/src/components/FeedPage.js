@@ -89,7 +89,7 @@ class FeedPage extends Component {
 function mapStateToProps ({ loggedUser, posts }) {
     return {
         username: loggedUser.name,
-        postsIds: posts.ids
+        postsIds: posts.ids.filter(id => !posts[id].deleted)
     }
 }
 
