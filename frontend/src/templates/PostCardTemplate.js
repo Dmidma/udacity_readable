@@ -14,7 +14,7 @@ const PostCardTemplate = (post, handleUpVote, handleDownVote) => {
     const currentDate = new Date(post.timestamp)
     const postDate = `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`
 
-    const postUrl = `/${post.category}/${post.id}`
+    const postUrl = `/c/${post.category}/${post.id}`
 
     return (
 

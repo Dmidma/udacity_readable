@@ -13,7 +13,8 @@ class HeaderActionBar extends Component {
 
     static propTypes = {
         history: PropTypes.object.isRequired,
-        username: PropTypes.string.isRequired
+        username: PropTypes.string.isRequired,
+        logout: PropTypes.func.isRequired
     }
 
     state = {
