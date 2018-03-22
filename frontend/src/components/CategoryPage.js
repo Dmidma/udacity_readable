@@ -6,9 +6,7 @@ import PostCard from './PostCard'
 import SortBox from './SortBox'
 import Pagination from './Pagination'
 
-import { getPosts } from '../utils/api'
-
-import { addPosts, setSort } from '../actions/postsActions'
+import { fetchPostsByCategory, setSort } from '../actions/postsActions'
 
 import { addCategories } from '../actions/categoriesActions'
 import { parse } from 'qs'
@@ -49,9 +47,8 @@ class CategoryPage extends Component {
                 this.props.setPostSorting(sort)
                 this.setState({ sort })
             }
-            getPosts().then(data => {
-                this.props.fetchPosts(data)
-            }) 
+
+            this.props.fetchCategoryPosts(this.props.match.params.category)
             this.props.fetchCategories()
         }
     }
@@ -105,7 +102,7 @@ function mapStateToProps ({ loggedUser, posts }) {
 
 function mapDispatchToProps (dispatch) {
     return {
-       fetchPosts: (posts) => dispatch(addPosts(posts)),
+       fetchCategoryPosts: (category) => dispatch(fetchPostsByCategory(category)),
        setPostSorting: (sort) => dispatch(setSort(sort)),
        fetchCategories: () => dispatch(addCategories())
     }

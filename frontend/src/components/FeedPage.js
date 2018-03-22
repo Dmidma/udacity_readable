@@ -6,9 +6,7 @@ import PostCard from './PostCard'
 import SortBox from './SortBox'
 import Pagination from './Pagination'
 
-import { getPosts } from '../utils/api'
-
-import { addPosts, setSort } from '../actions/postsActions'
+import { fetchAllPosts, setSort } from '../actions/postsActions'
 
 import { addCategories } from '../actions/categoriesActions'
 import { parse } from 'qs'
@@ -42,9 +40,7 @@ class FeedPage extends Component {
                 this.props.setPostSorting(sort)
                 this.setState({ sort })
             }
-            getPosts().then(data => {
-                this.props.fetchPosts(data)
-            }) 
+            this.props.fetchPosts()
             this.props.fetchCategories()
         }
     }
@@ -94,7 +90,7 @@ function mapStateToProps ({ loggedUser, posts }) {
 
 function mapDispatchToProps (dispatch) {
     return {
-       fetchPosts: (posts) => dispatch(addPosts(posts)),
+       fetchPosts: () => dispatch(fetchAllPosts()),
        setPostSorting: (sort) => dispatch(setSort(sort)),
        fetchCategories: () => dispatch(addCategories())
     }

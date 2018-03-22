@@ -2,7 +2,9 @@ import {
     upVotePost as _upVotePost,
     downVotePost as _downVotePost,
     addAPost as _addAPost,
-    deletePost as _deletePost
+    deletePost as _deletePost,
+    getPosts as _getPots,
+    getPostsByCategory as _getPostsByCategory
 } from '../utils/api'
 
 
@@ -17,7 +19,17 @@ export const DELETE_POST = 'DELETE_POST'
 
 
 // posts is an array
-export const addPosts = (posts) => ({ type: ADD_POSTS, posts })
+const addPostsInStore = (posts) => ({ type: ADD_POSTS, posts })
+
+export const fetchAllPosts = () => (dispatch) => {
+    _getPots()
+        .then(posts => dispatch(addPostsInStore(posts)))
+}
+
+export const fetchPostsByCategory = (category) => (dispatch) => {
+    _getPostsByCategory(category)
+        .then(posts => dispatch(addPostsInStore(posts)))
+}
 
 
 const addNewPost = (post) => ({ type: ADD_NEW_POST, post })
