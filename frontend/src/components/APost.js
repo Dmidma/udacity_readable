@@ -8,7 +8,7 @@ import { getPostById } from '../utils/api'
 // import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 // import { actionCreator } from '../actions'
-
+import { deletePost } from '../utils/api'
 
 
 class APost extends Component {
@@ -42,7 +42,8 @@ class APost extends Component {
 
 
     confirmDelete = () => {
-        console.log("YEAH")
+        deletePost(this.state.post.id)
+            .then(done => this.props.history.push("/feed"))
     }
  
 

@@ -2,8 +2,6 @@ import { Component } from 'react'
 
 import PostCardTemplate from '../templates/PostCardTemplate'
 
-
-// import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { upVotePost, downVotePost, deletePost } from '../actions/postsActions'
 import PropTypes from 'prop-types'
