@@ -19,13 +19,13 @@ class Pagination extends Component {
         const { finalPage, page } = nextProps
         
         if (finalPage === 1) {
-            this.setState({ isNextDisabled: true, isPrevDisable: true })
+            this.setState({ isNextDisabled: true, isPrevDisabled: true })
         }
         else {
             if (page === 1)
-                this.setState({ isPrevDisabled: true })
+                this.setState({ isPrevDisabled: true, isNextDisabled: false })
             else if (page === finalPage)
-                this.setState({ isNextDisabled: true })
+                this.setState({ isNextDisabled: true, isPrevDisabled: false })
             else
                 this.setState({ isPrevDisabled: false, isNextDisabled: false })
         }
