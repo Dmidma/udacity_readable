@@ -48,10 +48,10 @@ class APost extends Component {
  
 
     render() {
-        const { post } = this.state
+        const { post, isPostedByLoggedUser } = this.state
         if (post["id"] === undefined) return null
         return (
-            APostTemplate(this.state.post, this.confirmDelete.bind(this))
+            APostTemplate(isPostedByLoggedUser, post, this.confirmDelete.bind(this))
 
         )
     }

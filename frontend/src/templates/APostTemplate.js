@@ -3,7 +3,7 @@ import {Card, CardTitle, CardText} from 'material-ui/Card'
 import HeaderActionBar from '../components/HeaderActionBar'
 import UpdatePostBox from '../components/UpdatePostBox'
 
-const APostTemplate = (post, confirmDelete) => (
+const APostTemplate = (isPostedByLoggedUser, post, confirmDelete) => (
     <div>
     <HeaderActionBar page={`/c/${post.category}`} />
     <Card className="post-details">
@@ -13,7 +13,9 @@ const APostTemplate = (post, confirmDelete) => (
         <CardText>
             {post.body}
 
+    { isPostedByLoggedUser &&
         <UpdatePostBox postId={post.id} postTitle={post.title} confirmDelete={confirmDelete} />
+    }
         </CardText>
     </Card>
     </div>
