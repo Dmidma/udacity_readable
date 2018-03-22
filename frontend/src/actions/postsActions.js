@@ -4,7 +4,8 @@ import {
     addAPost as _addAPost,
     deletePost as _deletePost,
     getPosts as _getPots,
-    getPostsByCategory as _getPostsByCategory
+    getPostsByCategory as _getPostsByCategory,
+    updateDetailsOfPost as _updateDetailsOfPost
 } from '../utils/api'
 
 
@@ -17,6 +18,7 @@ export const ADD_NEW_POST = 'ADD_NEW_POST'
 export const SET_SORT = 'SET_SORT'
 export const DELETE_POST = 'DELETE_POST'
 export const SET_CATEGORY = 'SET_CATEGORY'
+export const EDIT_POST = 'EDIT_POST'
 
 
 // posts is an array
@@ -68,3 +70,15 @@ const deletePostInStore = (postId) => ({ type: DELETE_POST, postId })
 
 
 export const setCategory = (category) => ({ type: SET_CATEGORY, category })
+
+
+
+
+const editPostInStore = (post) => ({ type: EDIT_POST, post })
+
+export const editPost = (id, title, body) => (dispatch) => {
+    _updateDetailsOfPost(id, title, body)
+        .then(post => dispatch(editPostInStore(post)))
+}
+
+

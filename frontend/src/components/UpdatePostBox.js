@@ -9,7 +9,8 @@ class UpdatePostBox extends Component {
     static propTypes = {
         postId: PropTypes.string.isRequired,
         postTitle: PropTypes.string.isRequired,
-        confirmDelete: PropTypes.func.isRequired
+        confirmDelete: PropTypes.func.isRequired,
+        confirmEdit: PropTypes.func.isRequired
     }
     
     state = {
@@ -39,8 +40,7 @@ class UpdatePostBox extends Component {
     handleAcceptAction = () => {
         switch (this.state.action) {
             case 0:
-                console.log("Confirmed Editing")
-                // TODO: Add a prop function that will handle editing current post
+                this.props.confirmEdit()
             break;
             case 1:
                 this.props.confirmDelete()

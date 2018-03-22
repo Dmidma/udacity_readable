@@ -5,7 +5,8 @@ import {
     ADD_NEW_POST,
     SET_SORT,
     DELETE_POST,
-    SET_CATEGORY
+    SET_CATEGORY,
+    EDIT_POST
 } from '../actions/postsActions'
 
 
@@ -74,13 +75,25 @@ export const posts = (state = initPosts, action) => {
                 sort: defaultSort
             }
         case DELETE_POST:
-            state[action.postId].deleted = true
-            return { ...state }
+            if (state[action.postId] !== undefined) {
+                state[action.postId].deleted = true
+                return { ...state }
+            }
+            return state
         case SET_CATEGORY:
             return {
                 ...state,
                 category: action.category
             }
+        case EDIT_POST:
+            let editIdsSet = new Set(state.ids) 
+            if (editIdsSet.has(action.post.id)) {
+                state[action.post.id] = action.post
+                return {
+                    ...state
+                }        
+            }
+            return state
         default:
             return state
     }

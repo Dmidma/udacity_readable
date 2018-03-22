@@ -1,6 +1,5 @@
 import { Component } from 'react'
 
-// FIXME: You may need to check this path
 import CommentCardTemplate from '../templates/CommentCardTemplate'
 import PropTypes from 'prop-types'
 

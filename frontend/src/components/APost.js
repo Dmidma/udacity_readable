@@ -5,11 +5,10 @@ import APostTemplate from '../templates/APostTemplate'
 import { getPostById } from '../utils/api'
 
 
-// import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-// import { actionCreator } from '../actions'
-import { deletePost } from '../utils/api'
 
+
+import { deletePost } from '../actions/postsActions'
 
 class APost extends Component {
 
@@ -18,16 +17,8 @@ class APost extends Component {
         isPostedByLoggedUser: false
     }
 
-
-    componentDidMount() {
-
-        if (this.props.username === null) {
-            this.props.history.push("/")
-            return
-        }
-        
-
-        getPostById(this.props.match.params.post_id).then(post => {
+    fetchPost = (postId) => {
+        getPostById(postId).then(post => {
             if (post.author === this.props.username) {
                 this.setState({ isPostedByLoggedUser: true })
             }
@@ -36,14 +27,25 @@ class APost extends Component {
             } else {
                 this.setState({ post })
             }
-
         })
     }
 
 
+    componentDidMount() {
+        if (this.props.username === null) {
+            this.props.history.push("/")
+            return
+        }
+        this.fetchPost(this.props.match.params.post_id)
+    }
+
     confirmDelete = () => {
-        deletePost(this.state.post.id)
-            .then(done => this.props.history.push("/feed"))
+        this.props.deletePost(this.state.post.id)
+        this.props.history.push("/feed")
+    }
+
+    confirmEdit = () => {
+        console.log("Confirm Edit")
     }
  
 
@@ -51,7 +53,8 @@ class APost extends Component {
         const { post, isPostedByLoggedUser } = this.state
         if (post["id"] === undefined) return null
         return (
-            APostTemplate(isPostedByLoggedUser, post, this.confirmDelete.bind(this))
+            APostTemplate(isPostedByLoggedUser, post, 
+                this.confirmDelete.bind(this), this.confirmEdit.bind(this))
 
         )
     }
@@ -65,10 +68,9 @@ function mapStateToProps ({ loggedUser }) {
 
 function mapDispatchToProps (dispatch) {
     return {
-        // propsName: () => dispatch(actionCreator())
+        deletePost: (postId) => dispatch(deletePost(postId))
     }
 }
 
 
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(APost))
 export default connect(mapStateToProps, mapDispatchToProps)(APost)

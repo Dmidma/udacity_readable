@@ -41,8 +41,6 @@ class CommentsSection extends Component {
         this.fetchCommentsPost()
     }
 
-
-
     handleFormSubmit = (e) => {
         e.preventDefault()
         const values = serializeForm(e.target, { hash: true })

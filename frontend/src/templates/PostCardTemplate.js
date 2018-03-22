@@ -50,7 +50,11 @@ const PostCardTemplate = (post, handleUpVote, handleDownVote, isPostedByLoggedUs
             hash: '#comments'
         }} > {post.commentCount} Comments </Link>
         {isPostedByLoggedUser &&
-            <UpdatePostBox postId={post.id} postTitle={post.title} confirmDelete={confirmDelete} />
+            <UpdatePostBox 
+                postId={post.id} 
+                postTitle={post.title} 
+                confirmDelete={confirmDelete}
+                confirmEdit={() => {console.log("ehere")}}/>
         }
         </div>
       </div>

@@ -38,7 +38,11 @@ const CommentCardTemplate = (comment) => {
             </p>
             </div>
 
-            <UpdatePostBox postId={"terma"} postTitle={"terma"} confirmDelete={() => { console.log("hello") }} />
+            <UpdatePostBox 
+                postId={"terma"} 
+                postTitle={"terma"} 
+                confirmDelete={() => { console.log("hello") }}
+                confirmEdit={() => {console.log("hi")}} />
         </div>
     )
 }
