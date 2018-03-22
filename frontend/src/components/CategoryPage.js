@@ -8,7 +8,6 @@ import Pagination from './Pagination'
 
 import { fetchPostsByCategory, setSort, setCategory } from '../actions/postsActions'
 
-import { addCategories } from '../actions/categoriesActions'
 import { parse } from 'qs'
 
 import { connect } from 'react-redux'
@@ -50,7 +49,6 @@ class CategoryPage extends Component {
             }
             this.props.fetchCategoryPosts(currentCategory)
             this.props.setCategoryInStore(currentCategory)
-            this.props.fetchCategories()
         }
     }
 
@@ -105,8 +103,7 @@ function mapDispatchToProps (dispatch) {
     return {
        setCategoryInStore: (category) => dispatch(setCategory(category)),
        fetchCategoryPosts: (category) => dispatch(fetchPostsByCategory(category)),
-       setPostSorting: (sort) => dispatch(setSort(sort)),
-       fetchCategories: () => dispatch(addCategories())
+       setPostSorting: (sort) => dispatch(setSort(sort))
     }
 }
 

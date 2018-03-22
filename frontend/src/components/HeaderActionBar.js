@@ -8,6 +8,8 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeUser } from '../actions/loggedUserActions'
 
+import { addCategories } from '../actions/categoriesActions'
+
 
 class HeaderActionBar extends Component {
 
@@ -16,6 +18,7 @@ class HeaderActionBar extends Component {
         username: PropTypes.string.isRequired,
         logout: PropTypes.func.isRequired,
         categories: PropTypes.array.isRequired,
+        fetchCategories: PropTypes.func.isRequired,
         page: PropTypes.string.isRequired
     }
 
@@ -23,6 +26,11 @@ class HeaderActionBar extends Component {
         isPostDialogOpen: false,
         isDrawerOpen: false
     }
+
+    componentDidMount() {
+        this.props.fetchCategories()
+    }
+
 
     openPostDialog = () => this.setState({ isPostDialogOpen: true })
     closePostDialog = () => this.setState({ isPostDialogOpen: false })
@@ -41,8 +49,8 @@ class HeaderActionBar extends Component {
             this.props.history.push('/feed')
         } else {
             this.props.history.push(`/c/${category}`)
-            window.location.reload()
         }
+        window.location.reload()
     }
 
     render() {
@@ -75,7 +83,8 @@ function mapStateToProps({ loggedUser, categories }) {
 
 function mapDispatchToProps (dispatch) {
     return {
-        logout: () => dispatch(removeUser())
+        logout: () => dispatch(removeUser()),
+        fetchCategories: () => dispatch(addCategories())
     }
 }
 

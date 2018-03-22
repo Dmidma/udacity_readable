@@ -8,7 +8,6 @@ import Pagination from './Pagination'
 
 import { fetchAllPosts, setSort, setCategory } from '../actions/postsActions'
 
-import { addCategories } from '../actions/categoriesActions'
 import { parse } from 'qs'
 
 
@@ -42,7 +41,6 @@ class FeedPage extends Component {
             }
             this.props.fetchPosts()
             this.props.setCategoryInStore()
-            this.props.fetchCategories()
         }
     }
 
@@ -94,7 +92,6 @@ function mapDispatchToProps (dispatch) {
        setCategoryInStore: () => dispatch(setCategory("all")),
        fetchPosts: () => dispatch(fetchAllPosts()),
        setPostSorting: (sort) => dispatch(setSort(sort)),
-       fetchCategories: () => dispatch(addCategories())
     }
 }
 

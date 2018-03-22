@@ -26,6 +26,7 @@ class APost extends Component {
             return
         }
         
+
         getPostById(this.props.match.params.post_id).then(post => {
             if (post.author === this.props.username) {
                 this.setState({ isPostedByLoggedUser: true })
@@ -44,7 +45,7 @@ class APost extends Component {
 
     render() {
         return (
-            APostTemplate(this.props.match.params.category, this.props.match.params.post_id)
+            APostTemplate(this.state.post)
 
         )
     }

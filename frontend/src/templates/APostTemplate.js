@@ -1,19 +1,18 @@
-/**
- * This is a generated Template for APost Component.
- * This is used to better organize things.
- *
- * You can copy the content of the JSX content into the render 
- * function of the component.
- *
- * It can be safely deleted.
- */
-
 import React from 'react'
+import {Card, CardTitle, CardText} from 'material-ui/Card'
+import HeaderActionBar from '../components/HeaderActionBar'
 
-
-const APostTemplate = (category, postId) => (
+const APostTemplate = (post) => (
     <div>
-        This is APost component for {postId} at category {category}
+    <HeaderActionBar page={`/c/${post.category}`} />
+    <Card>
+        <CardTitle 
+            title={post.title} 
+            subtitle={`Posted By ${post.author} on /c/${post.category}`} />
+        <CardText>
+            {post.body}
+        </CardText>
+    </Card>
     </div>
 )
 
