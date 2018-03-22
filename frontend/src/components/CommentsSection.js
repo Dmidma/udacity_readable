@@ -36,7 +36,7 @@ class CommentsSection extends Component {
             })
     }
 
-    
+
     componentDidMount() {
         this.fetchCommentsPost()
     }

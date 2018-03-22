@@ -5,9 +5,9 @@ import TextField from 'material-ui/TextField'
 
 
 
-import FontIcon from 'material-ui/FontIcon'
-import { blue500 } from 'material-ui/styles/colors'
-import UpdatePostBox from '../components/UpdatePostBox'
+
+import CommentCard from '../components/CommentCard'
+
 
 const CommentsSectionTemplate = (handleFormSubmit, comments) => (
     <div>
@@ -33,38 +33,7 @@ const CommentsSectionTemplate = (handleFormSubmit, comments) => (
     </div>
 
     {
-        comments.ids.map(id => (
-
-            <div key={id} className="comment-box">
-                <div className="votes-bts">
-                    <FontIcon
-                    className="material-icons"
-                    hoverColor={blue500} 
-                    >
-                    thumb_up
-                    </FontIcon>
-                        <h3>{comments[id].voteScore}</h3>
-                    <FontIcon
-                    className="material-icons"
-                    hoverColor={blue500} 
-                    >
-                    thumb_down
-                    </FontIcon>
-                </div>
-                <div className="content-section">
-
-                <p className="comment-header">
-                    Samir commented on 14/23/2001
-                </p>
-                <p className="comment-body">
-                    {comments[id].body}
-                </p>
-                </div>
-
-                <UpdatePostBox postId={"terma"} postTitle={"terma"} confirmDelete={() => { console.log("hello") }} />
-            </div>
-
-        ))
+        comments.ids.map(id => (<CommentCard key={id} comment={comments[id]} />))
     }
     </div>
 )
