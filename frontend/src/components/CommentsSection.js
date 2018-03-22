@@ -4,12 +4,15 @@ import serializeForm from 'form-serialize'
 import CommentsSectionTemplate from '../templates/CommentsSectionTemplate'
 import PropTypes from 'prop-types'
 
-import { getCommentsOfPost } from '../utils/api'
+import { getCommentsOfPost, addCommentToPost } from '../utils/api'
+
+import { connect } from 'react-redux'
 
 class CommentsSection extends Component {
 
     static propTypes = {
-        postId: PropTypes.string.isRequired
+        postId: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired
     }
 
     state = {
@@ -43,7 +46,14 @@ class CommentsSection extends Component {
     handleFormSubmit = (e) => {
         e.preventDefault()
         const values = serializeForm(e.target, { hash: true })
-        console.log(values)
+        const { postId, username } = this.props
+        addCommentToPost(postId, values.comment, username)
+            .then(comment => {
+                let currentComments = this.state.comments
+                currentComments.ids.unshift(comment.id)
+                currentComments[comment.id] = comment
+                this.setState({ comments: currentComments })
+            })
     }
 
     render() {
@@ -53,4 +63,17 @@ class CommentsSection extends Component {
     }
 }
 
-export default CommentsSection
+function mapStateToProps ({ loggedUser }) {
+    return {
+        username: loggedUser.name
+    }
+}
+
+function mapDispatchToProps (dispatch) {
+    return {
+        // propsName: () => dispatch(actionCreator())
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentsSection)
