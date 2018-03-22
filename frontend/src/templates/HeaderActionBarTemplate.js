@@ -12,12 +12,13 @@ import { blue500 } from 'material-ui/styles/colors'
 import Drawer from 'material-ui/Drawer'
 import AppBar from 'material-ui/AppBar'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
-
+import { Link } from 'react-router-dom'
 
 const HeaderActionBarTemplate = (
     username, handleLogout, 
     isPostDialogOpen, openPostDialog, closePostDialog,
-    isDrawerOpen, openDrawer, closeDrawer) => (
+    isDrawerOpen, openDrawer, closeDrawer,
+    categories) => (
     <div>
     <Toolbar className="sticky-toolbar">
         <ToolbarGroup firstChild={true}>
@@ -58,8 +59,15 @@ const HeaderActionBarTemplate = (
             title="Categories" 
             iconElementLeft={<IconButton><NavigationClose onClick={closeDrawer} /></IconButton>}
 />
-        <MenuItem>Redux</MenuItem>
-        <MenuItem>React</MenuItem>
+        { 
+            categories.map(category => (
+                <Link className="category-link" key={category} to={`/c/${category}`}>
+                <MenuItem>
+                    {category}
+                </MenuItem>
+                </Link>
+            )) 
+        }
     </Drawer>
     </div>
 )

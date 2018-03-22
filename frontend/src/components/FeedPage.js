@@ -79,7 +79,6 @@ class FeedPage extends Component {
                     finalPage={Math.ceil(this.props.postsIds.length / 3)}
                     handleNext={this.handlePaginationButtons(1).bind(this)}
                     handlePrev={this.handlePaginationButtons(-1).bind(this)}
-                     
                 />
             </div>
         )

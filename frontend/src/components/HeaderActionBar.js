@@ -14,7 +14,8 @@ class HeaderActionBar extends Component {
     static propTypes = {
         history: PropTypes.object.isRequired,
         username: PropTypes.string.isRequired,
-        logout: PropTypes.func.isRequired
+        logout: PropTypes.func.isRequired,
+        categories: PropTypes.array.isRequired
     }
 
     state = {
@@ -39,14 +40,16 @@ class HeaderActionBar extends Component {
             HeaderActionBarTemplate(
                 this.props.username, this.handleLogoutOnClik,
                 this.state.isPostDialogOpen, this.openPostDialog, this.closePostDialog,
-                this.state.isDrawerOpen, this.openDrawer, this.closeDrawer)
+                this.state.isDrawerOpen, this.openDrawer, this.closeDrawer,
+                this.props.categories)
         )
     }
 }
 
-function mapStateToProps({ loggedUser }) {
+function mapStateToProps({ loggedUser, categories }) {
     return {
-        username: loggedUser.name
+        username: loggedUser.name,
+        categories: categories.ids
     }
 }
 

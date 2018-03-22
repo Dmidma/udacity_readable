@@ -130,3 +130,7 @@
     display: inline;
     float: right;
 }
+
+.category-link {
+    text-decoration: none;
+}
