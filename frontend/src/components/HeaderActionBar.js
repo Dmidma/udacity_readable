@@ -46,12 +46,21 @@ class HeaderActionBar extends Component {
     }
 
     render() {
+        const { username, page, categories } = this.props
+        const { isPostDialogOpen, isDrawerOpen } = this.state
+        let categoriesObj = categories.map(category => {
+            return {
+                category,
+                isDisabled: page.split("/")[2] === category
+            }
+        })
+        categoriesObj.unshift({ category: "all", isDisabled: page === "FeedPage" })
         return (
             HeaderActionBarTemplate(
-                this.props.username, this.props.page, this.handleLogoutOnClik,
-                this.state.isPostDialogOpen, this.openPostDialog, this.closePostDialog,
-                this.state.isDrawerOpen, this.openDrawer, this.closeDrawer,
-                this.props.categories, this.clickCategory.bind(this))
+                username, page, this.handleLogoutOnClik,
+                isPostDialogOpen, this.openPostDialog, this.closePostDialog,
+                isDrawerOpen, this.openDrawer, this.closeDrawer,
+                categoriesObj, this.clickCategory.bind(this))
         )
     }
 }

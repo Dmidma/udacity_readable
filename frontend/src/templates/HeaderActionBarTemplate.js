@@ -59,14 +59,10 @@ const HeaderActionBarTemplate = (
             <AppBar 
                 title="Categories" 
                 iconElementLeft={<IconButton><NavigationClose onClick={closeDrawer} /></IconButton>} />
-
-                <MenuItem key={"all"} onClick={clickCategory("all")}>
-                    all
-                </MenuItem>
             { 
-                categories.map(category => (
-                    <MenuItem key={category} onClick={clickCategory(category)}>
-                        {category}
+                categories.map(categoryObj => (
+                    <MenuItem disabled={categoryObj.isDisabled} key={categoryObj.category} onClick={clickCategory(categoryObj.category)}>
+                        {categoryObj.category}
                     </MenuItem>
                 )) 
             }
