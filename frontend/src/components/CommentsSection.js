@@ -47,6 +47,7 @@ class CommentsSection extends Component {
         e.preventDefault()
         const values = serializeForm(e.target, { hash: true })
         const { postId, username } = this.props
+        e.target.comment.value = ""
         addCommentToPost(postId, values.comment, username)
             .then(comment => {
                 let currentComments = this.state.comments
@@ -58,7 +59,7 @@ class CommentsSection extends Component {
 
     render() {
         return (
-            CommentsSectionTemplate(this.handleFormSubmit)
+            CommentsSectionTemplate(this.handleFormSubmit, this.state.comments)
         )
     }
 }
