@@ -134,3 +134,7 @@
 .category-link {
     text-decoration: none;
 }
+
+.post-details {
+    margin: 70px 30px 0 30px;
+}

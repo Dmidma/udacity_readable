@@ -1,16 +1,19 @@
 import React from 'react'
 import {Card, CardTitle, CardText} from 'material-ui/Card'
 import HeaderActionBar from '../components/HeaderActionBar'
+import UpdatePostBox from '../components/UpdatePostBox'
 
-const APostTemplate = (post) => (
+const APostTemplate = (post, confirmDelete) => (
     <div>
     <HeaderActionBar page={`/c/${post.category}`} />
-    <Card>
+    <Card className="post-details">
         <CardTitle 
             title={post.title} 
             subtitle={`Posted By ${post.author} on /c/${post.category}`} />
         <CardText>
             {post.body}
+
+        <UpdatePostBox postId={post.id} postTitle={post.title} confirmDelete={confirmDelete} />
         </CardText>
     </Card>
     </div>

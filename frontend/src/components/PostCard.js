@@ -5,7 +5,7 @@ import PostCardTemplate from '../templates/PostCardTemplate'
 
 // import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { upVotePost, downVotePost } from '../actions/postsActions'
+import { upVotePost, downVotePost, deletePost } from '../actions/postsActions'
 import PropTypes from 'prop-types'
 
 
@@ -29,6 +29,10 @@ class PostCard extends Component {
         this.props.downVotePost(this.props.postId)
     }
 
+    confirmDelete = () => {
+        this.props.deletePost(this.props.post.id)
+    }
+
     componentDidMount() {
         const { username, post } = this.props
         if (post.author === username) {
@@ -42,7 +46,8 @@ class PostCard extends Component {
                 this.props.post,
                 this.handleUpVoteOnClick.bind(this),
                 this.handleDownVoteOnClick.bind(this),
-                this.state.isPostedByLoggedUser
+                this.state.isPostedByLoggedUser,
+                this.confirmDelete.bind(this)
             )
         )
     }
@@ -59,7 +64,8 @@ function mapStateToProps ({ loggedUser, posts }, ownProps) {
 function mapDispatchToProps (dispatch) {
     return {
         upVotePost: (id) => dispatch(upVotePost(id)),
-        downVotePost: (id) => dispatch(downVotePost(id))
+        downVotePost: (id) => dispatch(downVotePost(id)),
+        deletePost: (postId) => dispatch(deletePost(postId))
     }
 }
 

@@ -4,15 +4,12 @@ import UpdatePostBoxTemplate from '../templates/UpdatePostBoxTemplate'
 import PropTypes from 'prop-types'
 
 
-// import { withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { deletePost } from '../actions/postsActions'
-
 class UpdatePostBox extends Component {
 
     static propTypes = {
         postId: PropTypes.string.isRequired,
-        postTitle: PropTypes.string.isRequired
+        postTitle: PropTypes.string.isRequired,
+        confirmDelete: PropTypes.func.isRequired
     }
     
     state = {
@@ -43,9 +40,10 @@ class UpdatePostBox extends Component {
         switch (this.state.action) {
             case 0:
                 console.log("Confirmed Editing")
+                // TODO: Add a prop function that will handle editing current post
             break;
             case 1:
-                this.props.deletePost(this.props.postId)
+                this.props.confirmDelete()
             break;
             default:
         }
@@ -61,18 +59,5 @@ class UpdatePostBox extends Component {
     }
 }
 
-function mapStateToProps ({ posts }, ownProps) {
-    return {
-        postTitle: posts[ownProps.postId].title
-    }
-}
 
-function mapDispatchToProps (dispatch) {
-    return {
-        deletePost: (postId) => dispatch(deletePost(postId))
-    }
-}
-
-
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UpdatePostBox))
-export default connect(mapStateToProps, mapDispatchToProps)(UpdatePostBox)
+export default UpdatePostBox

@@ -9,7 +9,7 @@ import UpdatePostBox from '../components/UpdatePostBox'
 
 
 
-const PostCardTemplate = (post, handleUpVote, handleDownVote, isPostedByLoggedUser) => {
+const PostCardTemplate = (post, handleUpVote, handleDownVote, isPostedByLoggedUser, confirmDelete) => {
     
 
     const currentDate = new Date(post.timestamp)
@@ -50,7 +50,7 @@ const PostCardTemplate = (post, handleUpVote, handleDownVote, isPostedByLoggedUs
             hash: '#comments'
         }} > {post.commentCount} Comments </Link>
         {isPostedByLoggedUser &&
-            <UpdatePostBox postId={post.id} />
+            <UpdatePostBox postId={post.id} postTitle={post.title} confirmDelete={confirmDelete} />
         }
         </div>
       </div>

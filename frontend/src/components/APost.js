@@ -41,11 +41,16 @@ class APost extends Component {
     }
 
 
-
+    confirmDelete = () => {
+        console.log("YEAH")
+    }
+ 
 
     render() {
+        const { post } = this.state
+        if (post["id"] === undefined) return null
         return (
-            APostTemplate(this.state.post)
+            APostTemplate(this.state.post, this.confirmDelete.bind(this))
 
         )
     }
