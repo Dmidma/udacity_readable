@@ -106,6 +106,11 @@
 
 }
 
+.post-content {
+    font-size: 1.3em;
+}
+
+
 .max-width {
     width: 100% !important;
 }
@@ -129,6 +134,7 @@
 .update-section {
     display: inline;
     float: right;
+    align-self: flex-end;
 }
 
 .category-link {
@@ -137,6 +143,7 @@
 
 .post-details {
     margin: 70px 30px 0 30px;
+    padding: 20px;
 }
 
 
@@ -162,4 +169,24 @@
     border-bottom: 0.1em solid #999999;
     border-right: 0.09em dashed #999999;
     border-left: 0.09em dashed #999999;
+}
+
+.comment-count {
+    margin: 30px 0 20px 40px;
+}
+
+.comment-header {
+    font-size: 0.9em;
+    margin-bottom: 20px;
+}
+
+.comment-body {
+    font-size: 1.1em;
+}
+
+.votes-bts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100px;
 }

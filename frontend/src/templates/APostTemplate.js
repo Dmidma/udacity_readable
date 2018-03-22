@@ -12,8 +12,9 @@ const APostTemplate = (isPostedByLoggedUser, post, confirmDelete) => (
             title={post.title} 
             subtitle={`Posted By ${post.author} on /c/${post.category}`} />
         <CardText>
+    <p className="post-content">
             {post.body}
-
+    </p>
     { isPostedByLoggedUser &&
         <UpdatePostBox postId={post.id} postTitle={post.title} confirmDelete={confirmDelete} />
     }

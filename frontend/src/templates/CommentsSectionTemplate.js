@@ -12,9 +12,6 @@ import UpdatePostBox from '../components/UpdatePostBox'
 const CommentsSectionTemplate = (handleFormSubmit, comments) => (
     <div>
 
-       <div> 
-        Nbr commments
-        </div>
     <Card className="submit-comment-box">
         <form onSubmit={handleFormSubmit} >
             <TextField 
@@ -29,31 +26,42 @@ const CommentsSectionTemplate = (handleFormSubmit, comments) => (
         </form>
     </Card>
 
+
+
+    <div className="comment-count"> 
+        {comments.ids.length} commments
+    </div>
+
     {
         comments.ids.map(id => (
 
             <div key={id} className="comment-box">
-                <div>
-                <FontIcon
-                className="material-icons"
-                hoverColor={blue500} 
-                >
-                thumb_up
-                </FontIcon>
-                <h3>{comments[id].voteScore}</h3>
-                <FontIcon
-                className="material-icons"
-                hoverColor={blue500} 
-                >
-                thumb_down
-                </FontIcon>
+                <div className="votes-bts">
+                    <FontIcon
+                    className="material-icons"
+                    hoverColor={blue500} 
+                    >
+                    thumb_up
+                    </FontIcon>
+                        <h3>{comments[id].voteScore}</h3>
+                    <FontIcon
+                    className="material-icons"
+                    hoverColor={blue500} 
+                    >
+                    thumb_down
+                    </FontIcon>
                 </div>
                 <div className="content-section">
-                <p>
+
+                <p className="comment-header">
+                    Samir commented on 14/23/2001
+                </p>
+                <p className="comment-body">
                     {comments[id].body}
                 </p>
-
                 </div>
+
+                <UpdatePostBox postId={"terma"} postTitle={"terma"} confirmDelete={() => { console.log("hello") }} />
             </div>
 
         ))
