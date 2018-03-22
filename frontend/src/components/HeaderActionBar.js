@@ -15,7 +15,8 @@ class HeaderActionBar extends Component {
         history: PropTypes.object.isRequired,
         username: PropTypes.string.isRequired,
         logout: PropTypes.func.isRequired,
-        categories: PropTypes.array.isRequired
+        categories: PropTypes.array.isRequired,
+        page: PropTypes.string.isRequired
     }
 
     state = {
@@ -34,14 +35,23 @@ class HeaderActionBar extends Component {
         this.props.logout()
         this.props.history.push("/login")
     }
+   
+    clickCategory = (category) => () => {
+        if (category === "all") {
+            this.props.history.push('/feed')
+        } else {
+            this.props.history.push(`/c/${category}`)
+            window.location.reload()
+        }
+    }
 
     render() {
         return (
             HeaderActionBarTemplate(
-                this.props.username, this.handleLogoutOnClik,
+                this.props.username, this.props.page, this.handleLogoutOnClik,
                 this.state.isPostDialogOpen, this.openPostDialog, this.closePostDialog,
                 this.state.isDrawerOpen, this.openDrawer, this.closeDrawer,
-                this.props.categories)
+                this.props.categories, this.clickCategory.bind(this))
         )
     }
 }

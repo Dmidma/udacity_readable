@@ -1,6 +1,5 @@
 import { Component } from 'react'
 
-// FIXME: You may need to check this path
 import SortBoxTemplate from '../templates/SortBoxTemplate'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'

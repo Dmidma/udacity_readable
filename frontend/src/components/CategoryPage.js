@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import { connect } from 'react-redux'
 import HeaderActionBar from './HeaderActionBar'
 import PostCard from './PostCard'
 import SortBox from './SortBox'
@@ -13,19 +13,26 @@ import { addPosts, setSort } from '../actions/postsActions'
 import { addCategories } from '../actions/categoriesActions'
 import { parse } from 'qs'
 
+import { connect } from 'react-redux'
 
+class CategoryPage extends Component {
 
-class FeedPage extends Component {
+    static propTypes = {
+        username: PropTypes.string
+    }
+
 
     state = {
         sort: "best",
-        page: 1
+        page: 1,
+        categoryName: ''
     }
     
     componentDidMount() {
         if (this.props.username === null) {
             this.props.history.push("/")
         } else {
+            this.setState({ categoryName: this.props.match.params.category })
             const queryString = this.props.history.location.search
             if (queryString) {
                 const queryObj = parse(queryString, { ignoreQueryPrefix: true })
@@ -67,11 +74,13 @@ class FeedPage extends Component {
         this.props.history.push("?page=" + curretPage)
     }
     
+
+
     render() {
         if (this.props.username === null) return null
         return (
             <div>
-                <HeaderActionBar page={"FeedPage"} />
+                <HeaderActionBar page={`/c/${this.state.categoryName}`} />
                 <SortBox sort={this.state.sort} />
                 { this.getPostsForPage(this.state.page) }
                 <Pagination 
@@ -84,6 +93,7 @@ class FeedPage extends Component {
         )
     }
 }
+
 
 function mapStateToProps ({ loggedUser, posts }) {
     return {
@@ -101,4 +111,4 @@ function mapDispatchToProps (dispatch) {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(FeedPage)
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryPage)

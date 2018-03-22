@@ -12,63 +12,65 @@ import { blue500 } from 'material-ui/styles/colors'
 import Drawer from 'material-ui/Drawer'
 import AppBar from 'material-ui/AppBar'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 const HeaderActionBarTemplate = (
-    username, handleLogout, 
+    username, page, handleLogout, 
     isPostDialogOpen, openPostDialog, closePostDialog,
     isDrawerOpen, openDrawer, closeDrawer,
-    categories) => (
+    categories, clickCategory) => (
     <div>
-    <Toolbar className="sticky-toolbar">
-        <ToolbarGroup firstChild={true}>
-        <FontIcon
-            className="material-icons"
-            hoverColor={blue500} 
-            onClick={openDrawer}
-        >
-            menu
-        </FontIcon>
-            <p className="user-section">Welcome</p> <h4 className="user-section bigger">{username}</h4>
-        </ToolbarGroup>
-        <ToolbarGroup>
-            <RaisedButton label="Create Post" primary={true} onClick={openPostDialog} />
-            <ToolbarSeparator />
-            <IconMenu
-            iconButtonElement={
-                <IconButton touch={true}>
-                <NavigationExpandMoreIcon />
-                </IconButton>
-            }
+        <Toolbar className="sticky-toolbar">
+            <ToolbarGroup firstChild={true}>
+            <FontIcon
+                className="material-icons"
+                hoverColor={blue500} 
+                onClick={openDrawer}
             >
-                <MenuItem primaryText="Logout" onClick={handleLogout} />
-            </IconMenu>
-        </ToolbarGroup>
-    </Toolbar>
-    <Dialog
-        className="long-dialog"
-        title="Create new Post"
-        open={isPostDialogOpen} 
-        onRequestClose={closePostDialog} > 
-        <CreatePost closeModel={closePostDialog} />
-    </Dialog>
+                menu
+            </FontIcon>
+                <p className="user-section">Welcome</p> <h4 className="user-section bigger">{username}</h4><p className="user-section">to {page}</p>
+            </ToolbarGroup>
+            <ToolbarGroup>
+                <RaisedButton label="Create Post" primary={true} onClick={openPostDialog} />
+                <ToolbarSeparator />
+                <IconMenu
+                iconButtonElement={
+                    <IconButton touch={true}>
+                    <NavigationExpandMoreIcon />
+                    </IconButton>
+                }
+                >
+                    <MenuItem primaryText="Logout" onClick={handleLogout} />
+                </IconMenu>
+            </ToolbarGroup>
+        </Toolbar>
+        
+        <Dialog
+            className="long-dialog"
+            title="Create new Post"
+            open={isPostDialogOpen} 
+            onRequestClose={closePostDialog} > 
+            <CreatePost closeModel={closePostDialog} />
+        </Dialog>
 
-    <Drawer 
-        open={isDrawerOpen} >
-        <AppBar 
-            title="Categories" 
-            iconElementLeft={<IconButton><NavigationClose onClick={closeDrawer} /></IconButton>}
-/>
-        { 
-            categories.map(category => (
-                <Link className="category-link" key={category} to={`/c/${category}`}>
-                <MenuItem>
-                    {category}
+        <Drawer 
+            open={isDrawerOpen} >
+            <AppBar 
+                title="Categories" 
+                iconElementLeft={<IconButton><NavigationClose onClick={closeDrawer} /></IconButton>} />
+
+                <MenuItem key={"all"} onClick={clickCategory("all")}>
+                    all
                 </MenuItem>
-                </Link>
-            )) 
-        }
-    </Drawer>
+            { 
+                categories.map(category => (
+                    <MenuItem key={category} onClick={clickCategory(category)}>
+                        {category}
+                    </MenuItem>
+                )) 
+            }
+        </Drawer>
     </div>
 )
 
