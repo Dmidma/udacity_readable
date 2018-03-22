@@ -78,11 +78,12 @@ class CategoryPage extends Component {
 
     render() {
         if (this.props.username === null) return null
+        const { categoryName, page, sort } = this.state
         return (
             <div>
-                <HeaderActionBar page={`/c/${this.state.categoryName}`} />
-                <SortBox sort={this.state.sort} />
-                { this.getPostsForPage(this.state.page) }
+                <HeaderActionBar page={`/c/${categoryName}`} />
+                <SortBox sort={sort} baseUrl={`/c/${categoryName}`} />
+                { this.getPostsForPage(page) }
                 <Pagination 
                     page={this.state.page} 
                     finalPage={Math.ceil(this.props.postsIds.length / 3)}

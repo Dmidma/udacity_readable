@@ -72,7 +72,7 @@ class FeedPage extends Component {
         return (
             <div>
                 <HeaderActionBar page={"FeedPage"} />
-                <SortBox sort={this.state.sort} />
+                <SortBox sort={this.state.sort} baseUrl={"/feed"} />
                 { this.getPostsForPage(this.state.page) }
                 <Pagination 
                     page={this.state.page} 

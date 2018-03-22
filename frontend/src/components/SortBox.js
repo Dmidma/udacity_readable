@@ -7,7 +7,8 @@ import PropTypes from 'prop-types'
 class SortBox extends Component {
 
     static propTypes = {
-        sort: PropTypes.string.isRequired
+        sort: PropTypes.string.isRequired,
+        baseUrl: PropTypes.string.isRequired
     } 
 
 
@@ -22,7 +23,7 @@ class SortBox extends Component {
 
 
     handleSortChanging = (e, i, v) => {
-        this.props.history.push(`/feed/${this.sortArray[v - 1]}`)
+        this.props.history.push(`${this.props.baseUrl}/${this.sortArray[v - 1]}`)
         // to rerender the whole page
         window.location.reload()
     }

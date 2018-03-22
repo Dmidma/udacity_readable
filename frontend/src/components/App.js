@@ -23,7 +23,7 @@ class App extends Component {
                 <Route exact path="/reload" component={null} />
                 <Route exact path="/login" component={LoginBox} />
                 <Route exact path="/feed/:sort(best|worst|oldest|newest)?" component={FeedPage} />
-                <Route exact path="/c/:category/" component={CategoryPage} />
+                <Route exact path="/c/:category/:sort(best|worst|oldest|newest)?" component={CategoryPage} />
                 <Route path="/c/:category/:post_id" component={APost} />
                 <Route component={Page404} />
             </Switch>
