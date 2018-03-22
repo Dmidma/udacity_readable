@@ -2,6 +2,7 @@ import React from 'react'
 import {Card, CardTitle, CardText} from 'material-ui/Card'
 import HeaderActionBar from '../components/HeaderActionBar'
 import UpdatePostBox from '../components/UpdatePostBox'
+import CommentsSection from '../components/CommentsSection'
 
 const APostTemplate = (isPostedByLoggedUser, post, confirmDelete) => (
     <div>
@@ -18,6 +19,7 @@ const APostTemplate = (isPostedByLoggedUser, post, confirmDelete) => (
     }
         </CardText>
     </Card>
+    <CommentsSection postId={post.id}  />
     </div>
 )
 
