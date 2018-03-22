@@ -6,7 +6,7 @@ import PostCard from './PostCard'
 import SortBox from './SortBox'
 import Pagination from './Pagination'
 
-import { fetchPostsByCategory, setSort } from '../actions/postsActions'
+import { fetchPostsByCategory, setSort, setCategory } from '../actions/postsActions'
 
 import { addCategories } from '../actions/categoriesActions'
 import { parse } from 'qs'
@@ -30,7 +30,8 @@ class CategoryPage extends Component {
         if (this.props.username === null) {
             this.props.history.push("/")
         } else {
-            this.setState({ categoryName: this.props.match.params.category })
+            const currentCategory = this.props.match.params.category
+            this.setState({ categoryName: currentCategory })
             const queryString = this.props.history.location.search
             if (queryString) {
                 const queryObj = parse(queryString, { ignoreQueryPrefix: true })
@@ -47,8 +48,8 @@ class CategoryPage extends Component {
                 this.props.setPostSorting(sort)
                 this.setState({ sort })
             }
-
-            this.props.fetchCategoryPosts(this.props.match.params.category)
+            this.props.fetchCategoryPosts(currentCategory)
+            this.props.setCategoryInStore(currentCategory)
             this.props.fetchCategories()
         }
     }
@@ -102,6 +103,7 @@ function mapStateToProps ({ loggedUser, posts }) {
 
 function mapDispatchToProps (dispatch) {
     return {
+       setCategoryInStore: (category) => dispatch(setCategory(category)),
        fetchCategoryPosts: (category) => dispatch(fetchPostsByCategory(category)),
        setPostSorting: (sort) => dispatch(setSort(sort)),
        fetchCategories: () => dispatch(addCategories())

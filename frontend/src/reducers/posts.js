@@ -4,7 +4,8 @@ import {
     DOWNVOTE_POST,
     ADD_NEW_POST,
     SET_SORT,
-    DELETE_POST
+    DELETE_POST,
+    SET_CATEGORY
 } from '../actions/postsActions'
 
 
@@ -13,9 +14,11 @@ import {
  * ids: is an array of the available posts' id
  * @sort: string to determine how posts are being sorted.
  *  best, worst, old, new
+ * @category: to know if the new added post can be added to the current posts
  */
 const initPosts = {
     sort: "best",
+    category: "all",
     ids: []
 }
 
@@ -51,7 +54,10 @@ export const posts = (state = initPosts, action) => {
                 }
             }
         case ADD_NEW_POST:
-            let newIds = state.ids;
+            if (state.category !== "all" && state.category !== action.post.category) {
+                return state
+            }
+            let newIds = state.ids
             newIds.unshift(action.post.id)
             return {
                 ...state,
@@ -70,6 +76,11 @@ export const posts = (state = initPosts, action) => {
         case DELETE_POST:
             state[action.postId].deleted = true
             return { ...state }
+        case SET_CATEGORY:
+            return {
+                ...state,
+                category: action.category
+            }
         default:
             return state
     }

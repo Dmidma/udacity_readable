@@ -16,6 +16,7 @@ export const DOWNVOTE_POST = 'DOWNVOTE_POST'
 export const ADD_NEW_POST = 'ADD_NEW_POST'
 export const SET_SORT = 'SET_SORT'
 export const DELETE_POST = 'DELETE_POST'
+export const SET_CATEGORY = 'SET_CATEGORY'
 
 
 // posts is an array
@@ -66,3 +67,4 @@ export const deletePost = (id) => (dispatch) => {
 const deletePostInStore = (postId) => ({ type: DELETE_POST, postId })
 
 
+export const setCategory = (category) => ({ type: SET_CATEGORY, category })
