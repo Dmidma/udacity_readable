@@ -5,17 +5,17 @@ import serializeForm from 'form-serialize'
 import CreatePostTemplate from '../templates/CreatePostTemplate'
 
 
-// import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { createPost as actionCreatePost } from '../actions/postsActions'
 
 
 class CreatePost extends Component {
 
     static propTypes = {
         closeModel: PropTypes.func.isRequired,
-        username: PropTypes.string.isRequired,
-        categories: PropTypes.array.isRequired
+        categories: PropTypes.array.isRequired,
+        handleSubmit: PropTypes.func.isRequired,
+        isEdit: PropTypes.bool.isRequired,
+        editValues: PropTypes.object
     }
 
     state = {
@@ -26,45 +26,50 @@ class CreatePost extends Component {
     handleFormSubmit = (e) => {
         e.preventDefault()
         const values = serializeForm(e.target, { hash: true })
-
-        if (this.props.categories.find(category => category === values.category) === undefined) {
-            this.setState({ isAvailable: false })
-            return 
-        } else {
-            this.setState({ isAvailable: true })
+        const { isEdit, categories, handleSubmit, closeModel } = this.props
+        // check for categories only on creation mode
+        if (!isEdit) {
+            if (categories.find(category => category === values.category) === undefined) {
+                this.setState({ isAvailable: false })
+                return 
+            } else {
+                this.setState({ isAvailable: true })
+            }
         }
-        
-        this.props.persistPost(
-            values.title,
-            values.content,
-            this.props.username,
-            values.category
-        )
-        this.props.closeModel()
+
+        handleSubmit(values.title, values.content, values.category) 
+        closeModel()
     }
 
+    checkEditValues = () => {
+        const { editValues, isEdit } = this.props
+        if (!isEdit || editValues === undefined) {
+            return {title: undefined, content: undefined}
+        }
+
+        return editValues
+    }
+
+
+
     render() {
+        const { categories, isEdit } = this.props
+        const editValues = this.checkEditValues()
         return (
             CreatePostTemplate(
                 this.handleFormSubmit.bind(this), 
-                this.props.categories, 
-                this.state.isAvailable)
+                categories, 
+                this.state.isAvailable,
+                isEdit, editValues.title, editValues.content)
         )
     }
 }
 
-function mapStateToProps ({ loggedUser, categories }) {
+function mapStateToProps ({ categories }) {
     return {
-        username: loggedUser.name,
         categories: categories.ids
     }
 }
 
-function mapDispatchToProps (dispatch) {
-    return {
-        persistPost: (title, body, author, category) => dispatch(actionCreatePost(title, body, author, category))
-    }
-}
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreatePost)
+export default connect(mapStateToProps)(CreatePost)

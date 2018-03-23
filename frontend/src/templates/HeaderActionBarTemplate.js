@@ -18,7 +18,8 @@ const HeaderActionBarTemplate = (
     username, page, handleLogout, 
     isPostDialogOpen, openPostDialog, closePostDialog,
     isDrawerOpen, openDrawer, closeDrawer,
-    categories, clickCategory) => (
+    categories, clickCategory,
+    handlePostCreation) => (
     <div>
         <Toolbar className="sticky-toolbar">
             <ToolbarGroup firstChild={true}>
@@ -51,7 +52,10 @@ const HeaderActionBarTemplate = (
             title="Create new Post"
             open={isPostDialogOpen} 
             onRequestClose={closePostDialog} > 
-            <CreatePost closeModel={closePostDialog} />
+            <CreatePost 
+                closeModel={closePostDialog} 
+                isEdit={false}
+                handleSubmit={handlePostCreation}/>
         </Dialog>
 
         <Drawer 

@@ -7,10 +7,10 @@ import PropTypes from 'prop-types'
 class UpdatePostBox extends Component {
 
     static propTypes = {
-        postId: PropTypes.string.isRequired,
-        postTitle: PropTypes.string.isRequired,
+        postTitle: PropTypes.string,
         confirmDelete: PropTypes.func.isRequired,
-        confirmEdit: PropTypes.func.isRequired
+        confirmEdit: PropTypes.func.isRequired,
+        isComment: PropTypes.bool.isRequired
     }
     
     state = {
@@ -50,7 +50,15 @@ class UpdatePostBox extends Component {
         this.closeConfirmDialog()
     }
 
-    setConfirmMessage = (action) => this.setState({ confirmMessage: `Are you sure you to ${action} post: "${this.props.postTitle}"?` }) 
+    setConfirmMessage = (action) =>  {
+        const { isComment, postTitle } = this.props
+        let confirmMessage = `Are you sure to ${action} comment?`
+        if (!isComment) {
+            confirmMessage = `Are you sure you to ${action} post: "${postTitle}"?` 
+        }
+        this.setState({ confirmMessage }) 
+    }
+    
 
     render() {
         return (

@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import { removeUser } from '../actions/loggedUserActions'
 
 import { addCategories } from '../actions/categoriesActions'
-
+import { createPost as actionCreatePost } from '../actions/postsActions'
 
 class HeaderActionBar extends Component {
 
@@ -53,6 +53,16 @@ class HeaderActionBar extends Component {
         window.location.reload()
     }
 
+
+    handlePostCreation = (title, content, category) => {
+        this.props.persistPost(
+            title,
+            content,
+            this.props.username,
+            category
+        )
+    }
+
     render() {
         const { username, page, categories } = this.props
         const { isPostDialogOpen, isDrawerOpen } = this.state
@@ -68,7 +78,8 @@ class HeaderActionBar extends Component {
                 username, page, this.handleLogoutOnClik,
                 isPostDialogOpen, this.openPostDialog, this.closePostDialog,
                 isDrawerOpen, this.openDrawer, this.closeDrawer,
-                categoriesObj, this.clickCategory.bind(this))
+                categoriesObj, this.clickCategory.bind(this), 
+                this.handlePostCreation.bind(this))
         )
     }
 }
@@ -84,7 +95,8 @@ function mapStateToProps({ loggedUser, categories }) {
 function mapDispatchToProps (dispatch) {
     return {
         logout: () => dispatch(removeUser()),
-        fetchCategories: () => dispatch(addCategories())
+        fetchCategories: () => dispatch(addCategories()),
+        persistPost: (title, body, author, category) => dispatch(actionCreatePost(title, body, author, category))
     }
 }
 

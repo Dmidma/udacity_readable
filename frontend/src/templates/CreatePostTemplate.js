@@ -4,11 +4,13 @@ import FlatButton from 'material-ui/FlatButton'
 import AutoComplete from 'material-ui/AutoComplete'
 
 
-const CreatePostTemplate = (handleFormSubmit, categories, isAvailable) => (
+const CreatePostTemplate = (handleFormSubmit, categories, isAvailable, 
+    isEdit, editTitle, editContent) => (
     <div>
         <form onSubmit={handleFormSubmit} >
             <TextField 
                 hintText="Title"
+                defaultValue={editTitle}
                 fullWidth={true}
                 floatingLabelText="Title"
                 name="title" />
@@ -17,12 +19,13 @@ const CreatePostTemplate = (handleFormSubmit, categories, isAvailable) => (
                 hintText="Content"
                 floatingLabelText="Content"
                 name="content" 
+                defaultValue={editContent}
                 fullWidth={true}
                 multiLine={true}
                 rows={4}/>
             <br/>
     {
-        !isAvailable &&
+        !isEdit && !isAvailable &&
 
             (<AutoComplete
                 hintText="Category"
@@ -35,7 +38,7 @@ const CreatePostTemplate = (handleFormSubmit, categories, isAvailable) => (
 
 
     {
-        isAvailable &&
+        !isEdit && isAvailable &&
             (
             <AutoComplete
                 hintText="Category"
@@ -45,7 +48,7 @@ const CreatePostTemplate = (handleFormSubmit, categories, isAvailable) => (
                 dataSource={categories}
                 />)
     }
-            <FlatButton className="center-form-button" type="submit" label="Create Post" />
+            <FlatButton className="center-form-button" type="submit" label={(isEdit)? 'Edit Post': 'Create Post' } />
         </form>
     </div>
 )

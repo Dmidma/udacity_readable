@@ -8,7 +8,7 @@ import { getPostById } from '../utils/api'
 import { connect } from 'react-redux'
 
 
-import { deletePost } from '../actions/postsActions'
+import { deletePost, editPost } from '../actions/postsActions'
 
 class APost extends Component {
 
@@ -68,7 +68,8 @@ function mapStateToProps ({ loggedUser }) {
 
 function mapDispatchToProps (dispatch) {
     return {
-        deletePost: (postId) => dispatch(deletePost(postId))
+        deletePost: (postId) => dispatch(deletePost(postId)),
+        updatePost: (postId, title, body) => dispatch(editPost(postId, title, body))
     }
 }
 
