@@ -190,3 +190,7 @@
     align-items: center;
     width: 100px;
 }
+
+.sort-in-comments {
+    margin: 10px 0 5px 50px;
+}

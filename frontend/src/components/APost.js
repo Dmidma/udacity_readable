@@ -3,19 +3,17 @@ import { Component } from 'react'
 import APostTemplate from '../templates/APostTemplate'
 
 import { getPostById } from '../utils/api'
-
-
 import { connect } from 'react-redux'
-
-
 import { deletePost, editPost } from '../actions/postsActions'
+import { parse } from 'qs'
 
 class APost extends Component {
 
     state = {
         post: {},
         isPostedByLoggedUser: false,
-        isEditDialogOpen: false
+        isEditDialogOpen: false,
+        sort: "best"
     }
 
     closeEditDialog = () => this.setState({ isEditDialogOpen: false })
@@ -35,12 +33,33 @@ class APost extends Component {
     }
 
 
+    checkSortQuery = (searchQuery) => {
+        const queryObj = parse(
+            searchQuery, 
+            { ignoreQueryPrefix: true }
+        )
+        if (queryObj.sort !== undefined) {
+            const sortSet = new Set(["best", "worst", "newest", "oldest"])
+            if (sortSet.has(queryObj.sort)) {
+               this.setState({ sort: queryObj.sort }) 
+            } else {
+                this.props.history.replace(this.props.history.location.pathname)
+            }
+
+        }
+    }
+
     componentDidMount() {
         if (this.props.username === null) {
             this.props.history.push("/")
             return
         }
+        this.checkSortQuery(this.props.history.location.search)
         this.fetchPost(this.props.match.params.post_id)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.checkSortQuery(nextProps.history.location.search)
     }
 
     confirmDelete = () => {
@@ -61,13 +80,15 @@ class APost extends Component {
     }
 
     render() {
-        const { post, isPostedByLoggedUser } = this.state
+        const { sort, post, isPostedByLoggedUser } = this.state
         if (post["id"] === undefined) return null
         return (
             APostTemplate(isPostedByLoggedUser, post, 
                 this.confirmDelete.bind(this), this.confirmEdit.bind(this),
                 this.state.isEditDialogOpen, this.closeEditDialog.bind(this),
-                this.submitPostEdit.bind(this), {title: post.title, content: post.body})
+                this.submitPostEdit.bind(this), {title: post.title, content: post.body},
+                sort
+            )
 
         )
     }

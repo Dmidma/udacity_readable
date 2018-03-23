@@ -5,7 +5,6 @@ import TextField from 'material-ui/TextField'
 import CommentCard from '../components/CommentCard'
 import EditCommentBox from '../components/EditCommentBox'
 
-
 const CommentsSectionTemplate = (handleFormSubmit, comments,
     upVoteComment, downVoteComment,
     editComment, deleteComment,
@@ -25,6 +24,7 @@ const CommentsSectionTemplate = (handleFormSubmit, comments,
                 <FlatButton type="submit" label="Save" />
             </form>
         </Card>
+
 
         <div className="comment-count"> 
             {comments.ids.length} commments

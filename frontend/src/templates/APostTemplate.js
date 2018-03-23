@@ -5,12 +5,13 @@ import UpdatePostBox from '../components/UpdatePostBox'
 import CommentsSection from '../components/CommentsSection'
 import Dialog from 'material-ui/Dialog'
 import CreatePost from '../components/CreatePost'
-
+import SortBox from '../components/SortBox'
 
 const APostTemplate = (isPostedByLoggedUser, post, 
     confirmDelete, confirmEdit,
     isEditDialogOpen, closeEditDialog, 
-    submitPostEdit, editValues) => (
+    submitPostEdit, editValues,
+    sort) => (
     <div>
         <HeaderActionBar page={`/c/${post.category}`} />
         <Card className="post-details">
@@ -31,6 +32,9 @@ const APostTemplate = (isPostedByLoggedUser, post,
 
             </CardText>
         </Card>
+
+
+        <SortBox sort={sort} baseUrl={`/c/${post.category}/${post.id}`} isInComments={true} />
 
         <Dialog
             className="long-dialog"
