@@ -18,6 +18,7 @@ const APostTemplate = (isPostedByLoggedUser, post,
                 { isPostedByLoggedUser &&
                     <UpdatePostBox 
                         postId={post.id} 
+                        isComment={false}
                         postTitle={post.title} 
                         confirmDelete={confirmDelete}
                         confirmEdit={confirmEdit} />
