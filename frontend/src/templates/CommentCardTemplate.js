@@ -5,7 +5,9 @@ import { blue500 } from 'material-ui/styles/colors'
 import UpdatePostBox from '../components/UpdatePostBox'
 
 
-const CommentCardTemplate = (comment) => {
+const CommentCardTemplate = (comment,
+    upVoteComment, downVoteComment
+    ) => {
     
     const currentDate = new Date(comment.timestamp)
     const commentDate = `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`
@@ -16,6 +18,7 @@ const CommentCardTemplate = (comment) => {
             <div className="votes-bts">
                 <FontIcon
                 className="material-icons"
+                onClick={upVoteComment}
                 hoverColor={blue500} 
                 >
                 thumb_up
@@ -24,6 +27,7 @@ const CommentCardTemplate = (comment) => {
                 <FontIcon
                 className="material-icons"
                 hoverColor={blue500} 
+                onClick={downVoteComment}
                 >
                 thumb_down
                 </FontIcon>
@@ -39,7 +43,6 @@ const CommentCardTemplate = (comment) => {
             </div>
 
             <UpdatePostBox 
-                postTitle={"terma"} 
                 isComment={true}
                 confirmDelete={() => { console.log("hello") }}
                 confirmEdit={() => {console.log("hi")}} />

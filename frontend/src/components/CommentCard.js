@@ -6,14 +6,19 @@ import PropTypes from 'prop-types'
 class CommentCard extends Component {
 
     static propTypes = {
-        comment: PropTypes.object.isRequired
+        comment: PropTypes.object.isRequired,
+        upVoteComment: PropTypes.func.isRequired,
+        downVoteComment: PropTypes.func.isRequired
     }
 
 
 
     render() {
+        const { upVoteComment, downVoteComment } = this.props
         return (
-            CommentCardTemplate(this.props.comment)
+            CommentCardTemplate(this.props.comment,
+                upVoteComment, downVoteComment
+            )
         )
     }
 }

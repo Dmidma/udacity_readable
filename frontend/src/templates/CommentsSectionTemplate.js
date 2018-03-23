@@ -6,7 +6,9 @@ import CommentCard from '../components/CommentCard'
 
 
 
-const CommentsSectionTemplate = (handleFormSubmit, comments) => (
+const CommentsSectionTemplate = (handleFormSubmit, comments,
+    upVoteComment, downVoteComment
+) => (
     <div>
         <Card className="submit-comment-box">
             <form onSubmit={handleFormSubmit} >
@@ -26,7 +28,13 @@ const CommentsSectionTemplate = (handleFormSubmit, comments) => (
             {comments.ids.length} commments
         </div>
 
-        {comments.ids.map(id => (<CommentCard key={id} comment={comments[id]} />))}
+        {comments.ids.map(id => (
+            <CommentCard 
+                key={id} 
+                comment={comments[id]} 
+                upVoteComment={upVoteComment(id)}   
+                downVoteComment={downVoteComment(id)}
+                />))}
     </div>
 )
 

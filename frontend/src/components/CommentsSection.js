@@ -4,7 +4,12 @@ import serializeForm from 'form-serialize'
 import CommentsSectionTemplate from '../templates/CommentsSectionTemplate'
 import PropTypes from 'prop-types'
 
-import { getCommentsOfPost, addCommentToPost } from '../utils/api'
+import { 
+    getCommentsOfPost, 
+    addCommentToPost,
+    upVoteComment,
+    downVoteComment
+} from '../utils/api'
 
 import { connect } from 'react-redux'
 
@@ -21,6 +26,25 @@ class CommentsSection extends Component {
         }
     }
 
+    updateStateAfterVote = (comment) => {
+        this.setState((oldState) => 
+            ({ 
+                comments: { 
+                ...oldState.comments, 
+                [comment.id]: comment }
+            })
+        )
+    }
+
+    handleUpVoteComment = (id) => () => {
+        upVoteComment(id)
+            .then(comment => this.updateStateAfterVote(comment))
+    }
+
+    handleDownVoteComment = (id) => () => {
+        downVoteComment(id)
+            .then(comment => this.updateStateAfterVote(comment))
+    }
 
     fetchCommentsPost = () => {
         getCommentsOfPost(this.props.postId)
@@ -57,7 +81,9 @@ class CommentsSection extends Component {
 
     render() {
         return (
-            CommentsSectionTemplate(this.handleFormSubmit, this.state.comments)
+            CommentsSectionTemplate(this.handleFormSubmit, this.state.comments,
+                this.handleUpVoteComment.bind(this), this.handleDownVoteComment.bind(this)
+            )
         )
     }
 }
