@@ -25,8 +25,14 @@ class CommentsSection extends Component {
     state = {
         comments: {
             ids: []
-        }
+        },
+        isEditDialogOpen: false,
+        commentToEdit: '',
+        idToEdit: null
     }
+
+    closeEditDialog = () => this.setState({ isEditDialogOpen: false })
+    openEditDialog = () => this.setState({ isEditDialogOpen: true })
 
     updateStateAfterVote = (comment) => {
         this.setState((oldState) => 
@@ -63,7 +69,7 @@ class CommentsSection extends Component {
     }
 
 
-    handleEditComment = (id) => () => {
+    handleDeleteComment = (id) => () => {
         deleteComment(id)
             .then(data => {
                 let currentIds = this.state.comments.ids
@@ -74,8 +80,22 @@ class CommentsSection extends Component {
             })
     }
 
-    handleDeleteComment = (id) => () => {
-        console.log("FIXME", id)
+    handleEditComment = (id) => () => {
+        this.setState({ commentToEdit: this.state.comments[id].body })
+        this.setState({ idToEdit: id })
+        this.openEditDialog()
+    }
+
+    saveCommentEdit = (newComment) => {
+        const { idToEdit } = this.state
+        updateDetailsOfComment(idToEdit, newComment)
+            .then(comment => {
+                let currentComments = this.state.comments
+                currentComments[idToEdit] = comment
+                this.setState({ comments: { ...currentComments } })
+
+                this.closeEditDialog()
+            })
     }
 
     componentDidMount() {
@@ -97,10 +117,12 @@ class CommentsSection extends Component {
     }
 
     render() {
+        const { comments, isEditDialogOpen, commentToEdit } = this.state
         return (
-            CommentsSectionTemplate(this.handleFormSubmit, this.state.comments,
+            CommentsSectionTemplate(this.handleFormSubmit, comments,
                 this.handleUpVoteComment.bind(this), this.handleDownVoteComment.bind(this),
-                this.handleEditComment.bind(this), this.handleDeleteComment.bind(this)
+                this.handleEditComment.bind(this), this.handleDeleteComment.bind(this),
+                isEditDialogOpen, this.closeEditDialog, commentToEdit, this.saveCommentEdit
             )
         )
     }

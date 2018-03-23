@@ -1,26 +1,29 @@
 import { Component } from 'react'
 import serializeForm from 'form-serialize'
 
-// FIXME: You may need to check this path
 import EditCommentBoxTemplate from '../templates/EditCommentBoxTemplate'
 import PropTypes from 'prop-types'
 
 class EditCommentBox extends Component {
 
     static propTypes = {
-        // prop: PropTypes.object.isRequired
+        comment: PropTypes.string.isRequired,
+        isDialogOpen: PropTypes.bool.isRequired,
+        closeDialog: PropTypes.func.isRequired,
+        saveEdit: PropTypes.func.isRequired
     }
 
 
     handleFormSubmit = (e) => {
         e.preventDefault()
         const values = serializeForm(e.target, { hash: true })
-        console.log(values)
+        this.props.saveEdit(values.comment)
     }
 
     render() {
+        const { comment, isDialogOpen, closeDialog } = this.props
         return (
-            EditCommentBoxTemplate(this.handleFormSubmit)
+            EditCommentBoxTemplate(this.handleFormSubmit, comment, isDialogOpen, closeDialog)
         )
     }
 }

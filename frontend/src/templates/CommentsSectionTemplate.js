@@ -3,12 +3,13 @@ import { Card } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
 import CommentCard from '../components/CommentCard'
-
+import EditCommentBox from '../components/EditCommentBox'
 
 
 const CommentsSectionTemplate = (handleFormSubmit, comments,
     upVoteComment, downVoteComment,
-    editComment, delteComment
+    editComment, deleteComment,
+    isEditDialogOpen, closeEditDialog, comment, saveEdit
 ) => (
     <div>
         <Card className="submit-comment-box">
@@ -36,8 +37,15 @@ const CommentsSectionTemplate = (handleFormSubmit, comments,
                 upVoteComment={upVoteComment(id)}   
                 downVoteComment={downVoteComment(id)}
                 editComment={editComment(id)}
-                deleteComment={editComment(id)}
+                deleteComment={deleteComment(id)}
             />))}
+
+
+        <EditCommentBox 
+            isDialogOpen={isEditDialogOpen} 
+            closeDialog={closeEditDialog}
+            comment={comment}
+            saveEdit={saveEdit} />
     </div>
 )
 

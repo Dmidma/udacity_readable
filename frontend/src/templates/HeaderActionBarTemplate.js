@@ -12,7 +12,8 @@ import { blue500 } from 'material-ui/styles/colors'
 import Drawer from 'material-ui/Drawer'
 import AppBar from 'material-ui/AppBar'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
-// import { Link } from 'react-router-dom'
+
+
 
 const HeaderActionBarTemplate = (
     username, page, handleLogout, 

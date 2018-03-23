@@ -1,24 +1,30 @@
-/**
- * This is a generated Template for EditCommentBox Component.
- * This is used to better organize things.
- *
- * You can copy the content of the JSX content into the render 
- * function of the component.
- *
- * It can be safely deleted.
- */
-
 import React from 'react'
 
+import TextField from 'material-ui/TextField'
+import FlatButton from 'material-ui/FlatButton'
+import Dialog from 'material-ui/Dialog'
 
-const EditCommentBoxTemplate = (handleFormSubmit) => (
+
+const EditCommentBoxTemplate = (handleFormSubmit, comment, isCommentDialogOpen, closeCommentDialog) => (
     <div>
-        This is EditCommentBox component
+
+        <Dialog
+            className="long-dialog"
+            title="Edit Comment"
+            open={isCommentDialogOpen} 
+            onRequestClose={closeCommentDialog} > 
         <form onSubmit={handleFormSubmit} >
-            <input name="input1" type="text" />
-            <input name="input2" type="text" />
-            <input name="submit" type="submit" />
+
+            <TextField 
+                hintText="Comment"
+                defaultValue={comment}
+                fullWidth={true}
+                floatingLabelText="Comment"
+                name="comment" />
+            <br/>
+            <FlatButton className="center-form-button" type="submit" label={"Save"} />
         </form>
+    </Dialog>
     </div>
 )
 
