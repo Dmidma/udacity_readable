@@ -9,7 +9,8 @@ import {
     addCommentToPost,
     upVoteComment,
     downVoteComment,
-    deleteComment
+    deleteComment,
+    updateDetailsOfComment
 } from '../utils/api'
 
 import { connect } from 'react-redux'
