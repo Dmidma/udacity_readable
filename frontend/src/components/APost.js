@@ -41,10 +41,7 @@ class APost extends Component {
         if (queryObj.sort !== undefined) {
             const sortSet = new Set(["best", "worst", "newest", "oldest"])
             if (sortSet.has(queryObj.sort)) {
-                this.setState({ sort: queryObj.sort }, () => {
-
-                    console.log("inside", this.state.sort)
-                }) 
+                this.setState({ sort: queryObj.sort })
             } else {
                 this.props.history.replace(this.props.history.location.pathname)
             }

@@ -7,8 +7,8 @@ import UpdatePostBox from '../components/UpdatePostBox'
 
 const CommentCardTemplate = (comment,
     upVoteComment, downVoteComment,
-    editComment, deleteComment
-    ) => {
+    editComment, deleteComment,
+    isOfLoggedUser) => {
     
     const currentDate = new Date(comment.timestamp)
     const commentDate = `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`
@@ -42,11 +42,13 @@ const CommentCardTemplate = (comment,
                 {comment.body}
             </p>
             </div>
-
+        {isOfLoggedUser &&
             <UpdatePostBox 
                 isComment={true}
                 confirmDelete={deleteComment}
-                confirmEdit={editComment} />
+                confirmEdit={editComment} 
+            />
+        } 
         </div>
     )
 }

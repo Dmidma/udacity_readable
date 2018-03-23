@@ -135,7 +135,9 @@ class CommentsSection extends Component {
         this.sortComments(comments, comments.ids, this.props.sort)
 
         return (
-            CommentsSectionTemplate(this.handleFormSubmit, comments,
+            CommentsSectionTemplate(
+                this.props.username,
+                this.handleFormSubmit, comments,
                 this.handleUpVoteComment.bind(this), this.handleDownVoteComment.bind(this),
                 this.handleEditComment.bind(this), this.handleDeleteComment.bind(this),
                 isEditDialogOpen, this.closeEditDialog, commentToEdit, this.saveCommentEdit

@@ -10,7 +10,8 @@ class CommentCard extends Component {
         upVoteComment: PropTypes.func.isRequired,
         downVoteComment: PropTypes.func.isRequired,
         editComment: PropTypes.func.isRequired,
-        deleteComment: PropTypes.func.isRequired
+        deleteComment: PropTypes.func.isRequired,
+        isOfLoggedUser: PropTypes.bool.isRequired
     }
 
 
@@ -20,12 +21,16 @@ class CommentCard extends Component {
             upVoteComment,
             downVoteComment, 
             editComment, 
-            deleteComment 
+            deleteComment,
+            comment,
+            isOfLoggedUser
         } = this.props
         return (
-            CommentCardTemplate(this.props.comment,
+            CommentCardTemplate(
+                comment,
                 upVoteComment, downVoteComment,
-                editComment, deleteComment
+                editComment, deleteComment,
+                isOfLoggedUser
             )
         )
     }

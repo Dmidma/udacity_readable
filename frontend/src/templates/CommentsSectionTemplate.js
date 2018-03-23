@@ -5,7 +5,8 @@ import TextField from 'material-ui/TextField'
 import CommentCard from '../components/CommentCard'
 import EditCommentBox from '../components/EditCommentBox'
 
-const CommentsSectionTemplate = (handleFormSubmit, comments,
+const CommentsSectionTemplate = (loggedUser,
+    handleFormSubmit, comments,
     upVoteComment, downVoteComment,
     editComment, deleteComment,
     isEditDialogOpen, closeEditDialog, comment, saveEdit
@@ -38,6 +39,7 @@ const CommentsSectionTemplate = (handleFormSubmit, comments,
                 downVoteComment={downVoteComment(id)}
                 editComment={editComment(id)}
                 deleteComment={deleteComment(id)}
+                isOfLoggedUser={comments[id].author === loggedUser}
             />))}
 
 
