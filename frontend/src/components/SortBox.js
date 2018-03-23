@@ -23,6 +23,10 @@ class SortBox extends Component {
     }
 
 
+    componentDidMount() {
+        this.setState({ sort: this.sortArray.indexOf(this.props.sort) + 1 })
+    }
+
     handleSortChanging = (e, i, v) => {
         if (this.props.isInComments) {
             this.props.history.push(`${this.props.baseUrl}?sort=${this.sortArray[v - 1]}`)

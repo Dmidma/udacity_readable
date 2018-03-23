@@ -41,21 +41,24 @@ class APost extends Component {
         if (queryObj.sort !== undefined) {
             const sortSet = new Set(["best", "worst", "newest", "oldest"])
             if (sortSet.has(queryObj.sort)) {
-               this.setState({ sort: queryObj.sort }) 
+                this.setState({ sort: queryObj.sort }, () => {
+
+                    console.log("inside", this.state.sort)
+                }) 
             } else {
                 this.props.history.replace(this.props.history.location.pathname)
             }
-
         }
     }
+
 
     componentDidMount() {
         if (this.props.username === null) {
             this.props.history.push("/")
             return
         }
-        this.checkSortQuery(this.props.history.location.search)
         this.fetchPost(this.props.match.params.post_id)
+        this.checkSortQuery(this.props.history.location.search)
     }
 
     componentWillReceiveProps(nextProps) {
@@ -89,7 +92,6 @@ class APost extends Component {
                 this.submitPostEdit.bind(this), {title: post.title, content: post.body},
                 sort
             )
-
         )
     }
 }

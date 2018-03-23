@@ -19,7 +19,8 @@ class CommentsSection extends Component {
 
     static propTypes = {
         postId: PropTypes.string.isRequired,
-        username: PropTypes.string.isRequired
+        username: PropTypes.string.isRequired,
+        sort: PropTypes.string.isRequired
     }
 
     state = {
@@ -29,6 +30,18 @@ class CommentsSection extends Component {
         isEditDialogOpen: false,
         commentToEdit: '',
         idToEdit: null
+    }
+
+
+    sortComments = (comments ,ids, sort) => {
+        let sortKey = "voteScore"
+        let order = 1
+        if (sort === "oldest" || sort === "newest") sortKey = "timestamp"
+        if (sort === "oldest" || sort === "worst") order *= -1
+
+        ids.sort((id1, id2) => {
+            return (comments[id1][sortKey] > comments[id2][sortKey])? -1 * order: order
+        })
     }
 
     closeEditDialog = () => this.setState({ isEditDialogOpen: false })
@@ -118,6 +131,9 @@ class CommentsSection extends Component {
 
     render() {
         const { comments, isEditDialogOpen, commentToEdit } = this.state
+        
+        this.sortComments(comments, comments.ids, this.props.sort)
+
         return (
             CommentsSectionTemplate(this.handleFormSubmit, comments,
                 this.handleUpVoteComment.bind(this), this.handleDownVoteComment.bind(this),

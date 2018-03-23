@@ -34,7 +34,11 @@ const APostTemplate = (isPostedByLoggedUser, post,
         </Card>
 
 
-        <SortBox sort={sort} baseUrl={`/c/${post.category}/${post.id}`} isInComments={true} />
+        <SortBox 
+            sort={sort} 
+            baseUrl={`/c/${post.category}/${post.id}`} 
+            isInComments={true} 
+        />
 
         <Dialog
             className="long-dialog"
@@ -49,7 +53,7 @@ const APostTemplate = (isPostedByLoggedUser, post,
         </Dialog>
 
 
-        <CommentsSection postId={post.id}  />
+        <CommentsSection postId={post.id} sort={sort}  />
     </div>
 )
 
