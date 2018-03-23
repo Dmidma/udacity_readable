@@ -8,7 +8,8 @@ import {
     getCommentsOfPost, 
     addCommentToPost,
     upVoteComment,
-    downVoteComment
+    downVoteComment,
+    deleteComment
 } from '../utils/api'
 
 import { connect } from 'react-redux'
@@ -61,6 +62,21 @@ class CommentsSection extends Component {
     }
 
 
+    handleEditComment = (id) => () => {
+        deleteComment(id)
+            .then(data => {
+                let currentIds = this.state.comments.ids
+                currentIds.splice(currentIds.indexOf(id), 1)
+                let currentComments = this.state.comments
+                delete currentComments[id]
+                this.setState({ comments: { ...currentComments, ids: currentIds } })
+            })
+    }
+
+    handleDeleteComment = (id) => () => {
+        console.log("FIXME", id)
+    }
+
     componentDidMount() {
         this.fetchCommentsPost()
     }
@@ -82,7 +98,8 @@ class CommentsSection extends Component {
     render() {
         return (
             CommentsSectionTemplate(this.handleFormSubmit, this.state.comments,
-                this.handleUpVoteComment.bind(this), this.handleDownVoteComment.bind(this)
+                this.handleUpVoteComment.bind(this), this.handleDownVoteComment.bind(this),
+                this.handleEditComment.bind(this), this.handleDeleteComment.bind(this)
             )
         )
     }

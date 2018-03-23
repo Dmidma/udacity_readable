@@ -6,7 +6,8 @@ import UpdatePostBox from '../components/UpdatePostBox'
 
 
 const CommentCardTemplate = (comment,
-    upVoteComment, downVoteComment
+    upVoteComment, downVoteComment,
+    editComment, deleteComment
     ) => {
     
     const currentDate = new Date(comment.timestamp)
@@ -44,8 +45,8 @@ const CommentCardTemplate = (comment,
 
             <UpdatePostBox 
                 isComment={true}
-                confirmDelete={() => { console.log("hello") }}
-                confirmEdit={() => {console.log("hi")}} />
+                confirmDelete={deleteComment}
+                confirmEdit={editComment} />
         </div>
     )
 }
