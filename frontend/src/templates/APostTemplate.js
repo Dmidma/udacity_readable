@@ -3,9 +3,14 @@ import {Card, CardTitle, CardText} from 'material-ui/Card'
 import HeaderActionBar from '../components/HeaderActionBar'
 import UpdatePostBox from '../components/UpdatePostBox'
 import CommentsSection from '../components/CommentsSection'
+import Dialog from 'material-ui/Dialog'
+import CreatePost from '../components/CreatePost'
+
 
 const APostTemplate = (isPostedByLoggedUser, post, 
-    confirmDelete, confirmEdit) => (
+    confirmDelete, confirmEdit,
+    isEditDialogOpen, closeEditDialog, 
+    submitPostEdit, editValues) => (
     <div>
         <HeaderActionBar page={`/c/${post.category}`} />
         <Card className="post-details">
@@ -26,6 +31,20 @@ const APostTemplate = (isPostedByLoggedUser, post,
 
             </CardText>
         </Card>
+
+        <Dialog
+            className="long-dialog"
+            title="Edit Post"
+            open={isEditDialogOpen} 
+            onRequestClose={closeEditDialog} > 
+            <CreatePost 
+                editValues={editValues}
+                closeModel={closeEditDialog} 
+                isEdit={true}
+                handleSubmit={submitPostEdit} />
+        </Dialog>
+
+
         <CommentsSection postId={post.id}  />
     </div>
 )

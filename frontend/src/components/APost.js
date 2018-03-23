@@ -14,8 +14,12 @@ class APost extends Component {
 
     state = {
         post: {},
-        isPostedByLoggedUser: false
+        isPostedByLoggedUser: false,
+        isEditDialogOpen: false
     }
+
+    closeEditDialog = () => this.setState({ isEditDialogOpen: false })
+    openEditDialog = () => this.setState({ isEditDialogOpen: true })
 
     fetchPost = (postId) => {
         getPostById(postId).then(post => {
@@ -45,16 +49,25 @@ class APost extends Component {
     }
 
     confirmEdit = () => {
-        console.log("Confirm Edit")
+        this.openEditDialog()
     }
  
+    submitPostEdit = (title, body) => {
+        this.props.updatePost(this.state.post.id, title, body)
+        let oldPost = this.state.post;
+        oldPost.title = title
+        oldPost.body = body
+        this.setState({ post: oldPost })
+    }
 
     render() {
         const { post, isPostedByLoggedUser } = this.state
         if (post["id"] === undefined) return null
         return (
             APostTemplate(isPostedByLoggedUser, post, 
-                this.confirmDelete.bind(this), this.confirmEdit.bind(this))
+                this.confirmDelete.bind(this), this.confirmEdit.bind(this),
+                this.state.isEditDialogOpen, this.closeEditDialog.bind(this),
+                this.submitPostEdit.bind(this), {title: post.title, content: post.body})
 
         )
     }
