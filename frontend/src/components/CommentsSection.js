@@ -16,6 +16,16 @@ import {
 import { connect } from 'react-redux'
 
 class CommentsSection extends Component {
+    
+    constructor(props) {
+        super(props)
+        this.handleUpVoteCommen = this.handleUpVoteComment.bind(this)
+        this.handleDownVoteComment = this.handleDownVoteComment.bind(this)
+        this.handleEditComment = this.handleEditComment.bind(this)
+        this.handleDeleteComment = this.handleDeleteComment.bind(this)
+    }
+    
+
 
     static propTypes = {
         postId: PropTypes.string.isRequired,
@@ -32,12 +42,20 @@ class CommentsSection extends Component {
         idToEdit: null
     }
 
-
+    
     sortComments = (comments ,ids, sort) => {
-        let sortKey = "voteScore"
         let order = 1
-        if (sort === "oldest" || sort === "newest") sortKey = "timestamp"
-        if (sort === "oldest" || sort === "worst") order *= -1
+        // IIFEs
+        // https://developer.mozilla.org/en-US/docs/Glossary/IIFE
+        const sortKey =(() => {
+            if (sort === "oldest" || sort === "newest") {
+                return "timestamp"
+            }
+            if (sort === "oldest" || sort === "worst") {
+                order *= -1
+            }
+            return "voteScore"
+        })()
 
         ids.sort((id1, id2) => {
             return (comments[id1][sortKey] > comments[id2][sortKey])? -1 * order: order
@@ -138,8 +156,8 @@ class CommentsSection extends Component {
             CommentsSectionTemplate(
                 this.props.username,
                 this.handleFormSubmit, comments,
-                this.handleUpVoteComment.bind(this), this.handleDownVoteComment.bind(this),
-                this.handleEditComment.bind(this), this.handleDeleteComment.bind(this),
+                this.handleUpVoteComment, this.handleDownVoteComment,
+                this.handleEditComment, this.handleDeleteComment,
                 isEditDialogOpen, this.closeEditDialog, commentToEdit, this.saveCommentEdit
             )
         )
