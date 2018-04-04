@@ -1,15 +1,15 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import HeaderActionBarTemplate from '../templates/HeaderActionBarTemplate'
+import HeaderActionBarTemplate from './HeaderActionBarTemplate'
 
 
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { removeUser } from '../actions/loggedUserActions'
+import { removeUser } from '../../actions/loggedUserActions'
 
-import { addCategories } from '../actions/categoriesActions'
-import { createPost as actionCreatePost } from '../actions/postsActions'
+import { addCategories } from '../../actions/categoriesActions'
+import { createPost as actionCreatePost } from '../../actions/postsActions'
 
 class HeaderActionBar extends Component {
 

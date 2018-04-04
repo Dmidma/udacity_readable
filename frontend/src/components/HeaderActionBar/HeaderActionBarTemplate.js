@@ -6,12 +6,13 @@ import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-mo
 import MenuItem from 'material-ui/MenuItem'
 import RaisedButton from 'material-ui/RaisedButton'
 import Dialog from 'material-ui/Dialog'
-import CreatePost from '../components/CreatePost'
 import FontIcon from 'material-ui/FontIcon'
 import { blue500 } from 'material-ui/styles/colors'
 import Drawer from 'material-ui/Drawer'
 import AppBar from 'material-ui/AppBar'
 import NavigationClose from 'material-ui/svg-icons/navigation/close'
+
+import CreatePost from '../CreatePost'
 
 
 

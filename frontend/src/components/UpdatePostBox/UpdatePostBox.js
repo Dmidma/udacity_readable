@@ -1,6 +1,6 @@
 import { Component } from 'react'
 
-import UpdatePostBoxTemplate from '../templates/UpdatePostBoxTemplate'
+import UpdatePostBoxTemplate from './UpdatePostBoxTemplate'
 import PropTypes from 'prop-types'
 
 

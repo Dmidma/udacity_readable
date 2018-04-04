@@ -1,6 +1,6 @@
 import { Component } from 'react'
 
-import CommentCardTemplate from '../templates/CommentCardTemplate'
+import CommentCardTemplate from './CommentCardTemplate'
 import PropTypes from 'prop-types'
 
 class CommentCard extends Component {

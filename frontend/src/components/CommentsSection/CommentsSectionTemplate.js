@@ -2,8 +2,8 @@ import React from 'react'
 import { Card } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import TextField from 'material-ui/TextField'
-import CommentCard from '../components/CommentCard'
-import EditCommentBox from '../components/EditCommentBox'
+import CommentCard from '../CommentCard'
+import EditCommentBox from '../EditCommentBox'
 
 const CommentsSectionTemplate = (loggedUser,
     handleFormSubmit, comments,

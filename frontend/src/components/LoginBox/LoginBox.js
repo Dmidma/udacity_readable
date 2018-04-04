@@ -3,9 +3,9 @@ import { Component } from 'react'
 
 // import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { addUser } from '../actions/loggedUserActions'
+import { addUser } from '../../actions/loggedUserActions'
 
-import LoginBoxTemplate from '../templates/LoginBoxTemplate'
+import LoginBoxTemplate from './LoginBoxTemplate'
 
 
 class LoginBox extends Component {

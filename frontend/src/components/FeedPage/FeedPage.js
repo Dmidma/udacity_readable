@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
-import HeaderActionBar from './HeaderActionBar'
-import PostCard from './PostCard'
-import SortBox from './SortBox'
-import Pagination from './Pagination'
+import HeaderActionBar from '../HeaderActionBar'
+import PostCard from '../PostCard'
+import SortBox from '../SortBox'
+import Pagination from '../Pagination'
 
-import { fetchAllPosts, setSort, setCategory } from '../actions/postsActions'
+import { fetchAllPosts, setSort, setCategory } from '../../actions/postsActions'
 
 import { parse } from 'qs'
 

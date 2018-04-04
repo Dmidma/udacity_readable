@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 
 import FontIcon from 'material-ui/FontIcon'
 import { blue500 } from 'material-ui/styles/colors'
-import UpdatePostBox from '../components/UpdatePostBox'
+import UpdatePostBox from '../UpdatePostBox/'
 import Dialog from 'material-ui/Dialog'
-import CreatePost from '../components/CreatePost'
+import CreatePost from '../CreatePost/'
 
 
 

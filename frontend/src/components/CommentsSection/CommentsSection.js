@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import serializeForm from 'form-serialize'
 
-import CommentsSectionTemplate from '../templates/CommentsSectionTemplate'
+import CommentsSectionTemplate from './CommentsSectionTemplate'
 import PropTypes from 'prop-types'
 
 import { 
@@ -11,7 +11,7 @@ import {
     downVoteComment,
     deleteComment,
     updateDetailsOfComment
-} from '../utils/api'
+} from '../../utils/api'
 
 import { connect } from 'react-redux'
 

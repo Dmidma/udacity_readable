@@ -1,6 +1,6 @@
 import { Component } from 'react'
 
-import PaginationTemplate from '../templates/PaginationTemplate'
+import PaginationTemplate from './PaginationTemplate'
 import PropTypes from 'prop-types'
 
 class Pagination extends Component {

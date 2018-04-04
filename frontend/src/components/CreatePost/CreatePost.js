@@ -2,7 +2,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import serializeForm from 'form-serialize'
 
-import CreatePostTemplate from '../templates/CreatePostTemplate'
+import CreatePostTemplate from './CreatePostTemplate'
 
 
 import { connect } from 'react-redux'

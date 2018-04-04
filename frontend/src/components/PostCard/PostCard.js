@@ -1,6 +1,6 @@
 import { Component } from 'react'
 
-import PostCardTemplate from '../templates/PostCardTemplate'
+import PostCardTemplate from './PostCardTemplate'
 
 import { connect } from 'react-redux'
 import { 
@@ -8,7 +8,7 @@ import {
     downVotePost, 
     deletePost,
     editPost
-} from '../actions/postsActions'
+} from '../../actions/postsActions'
 import PropTypes from 'prop-types'
 
 

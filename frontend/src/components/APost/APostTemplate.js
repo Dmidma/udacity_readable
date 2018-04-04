@@ -1,11 +1,13 @@
 import React from 'react'
-import {Card, CardTitle, CardText} from 'material-ui/Card'
-import HeaderActionBar from '../components/HeaderActionBar'
-import UpdatePostBox from '../components/UpdatePostBox'
-import CommentsSection from '../components/CommentsSection'
+import { Card, CardTitle, CardText } from 'material-ui/Card'
 import Dialog from 'material-ui/Dialog'
-import CreatePost from '../components/CreatePost'
-import SortBox from '../components/SortBox'
+
+import HeaderActionBar from '../HeaderActionBar'
+import UpdatePostBox from '../UpdatePostBox'
+import CommentsSection from '../CommentsSection'
+import CreatePost from '../CreatePost'
+import SortBox from '../SortBox'
+
 
 const APostTemplate = (isPostedByLoggedUser, post, 
     confirmDelete, confirmEdit,

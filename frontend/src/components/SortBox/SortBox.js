@@ -1,6 +1,6 @@
 import { Component } from 'react'
 
-import SortBoxTemplate from '../templates/SortBoxTemplate'
+import SortBoxTemplate from './SortBoxTemplate'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 

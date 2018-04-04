@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import HeaderActionBar from './HeaderActionBar'
-import PostCard from './PostCard'
-import SortBox from './SortBox'
-import Pagination from './Pagination'
+import HeaderActionBar from '../HeaderActionBar'
+import PostCard from '../PostCard'
+import SortBox from '../SortBox'
+import Pagination from '../Pagination'
 
-import { fetchPostsByCategory, setSort, setCategory } from '../actions/postsActions'
+import { fetchPostsByCategory, setSort, setCategory } from '../../actions/postsActions'
 
 import { parse } from 'qs'
 
@@ -17,7 +17,6 @@ class CategoryPage extends Component {
     static propTypes = {
         username: PropTypes.string
     }
-
 
     state = {
         sort: "best",

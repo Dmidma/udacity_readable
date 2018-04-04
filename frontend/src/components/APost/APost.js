@@ -1,10 +1,10 @@
 import { Component } from 'react'
 
-import APostTemplate from '../templates/APostTemplate'
+import APostTemplate from './APostTemplate'
 
-import { getPostById } from '../utils/api'
+import { getPostById } from '../../utils/api'
 import { connect } from 'react-redux'
-import { deletePost, editPost } from '../actions/postsActions'
+import { deletePost, editPost } from '../../actions/postsActions'
 import { parse } from 'qs'
 
 class APost extends Component {

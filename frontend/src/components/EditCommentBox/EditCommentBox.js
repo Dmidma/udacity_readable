@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import serializeForm from 'form-serialize'
 
-import EditCommentBoxTemplate from '../templates/EditCommentBoxTemplate'
+import EditCommentBoxTemplate from './EditCommentBoxTemplate'
 import PropTypes from 'prop-types'
 
 class EditCommentBox extends Component {
