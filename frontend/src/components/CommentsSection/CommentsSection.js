@@ -16,6 +16,11 @@ import {
 import { connect } from 'react-redux'
 
 class CommentsSection extends Component {
+    static propTypes = {
+        postId: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired,
+        sort: PropTypes.string.isRequired
+    }
     
     constructor(props) {
         super(props)
@@ -23,14 +28,6 @@ class CommentsSection extends Component {
         this.handleDownVoteComment = this.handleDownVoteComment.bind(this)
         this.handleEditComment = this.handleEditComment.bind(this)
         this.handleDeleteComment = this.handleDeleteComment.bind(this)
-    }
-    
-
-
-    static propTypes = {
-        postId: PropTypes.string.isRequired,
-        username: PropTypes.string.isRequired,
-        sort: PropTypes.string.isRequired
     }
 
     state = {
@@ -42,7 +39,10 @@ class CommentsSection extends Component {
         idToEdit: null
     }
 
-    
+    componentDidMount() {
+        this.fetchCommentsPost()
+    }
+
     sortComments = (comments ,ids, sort) => {
         let order = 1
         // IIFEs
@@ -62,8 +62,7 @@ class CommentsSection extends Component {
         })
     }
 
-    closeEditDialog = () => this.setState({ isEditDialogOpen: false })
-    openEditDialog = () => this.setState({ isEditDialogOpen: true })
+    toggleEditDialog = () => this.setState((currentState) => ({ isEditDialogOpen: !currentState.isEditDialogOpen }))
 
     updateStateAfterVote = (comment) => {
         this.setState((oldState) => 
@@ -114,7 +113,7 @@ class CommentsSection extends Component {
     handleEditComment = (id) => () => {
         this.setState({ commentToEdit: this.state.comments[id].body })
         this.setState({ idToEdit: id })
-        this.openEditDialog()
+        this.toggleEditDialog()
     }
 
     saveCommentEdit = (newComment) => {
@@ -125,13 +124,10 @@ class CommentsSection extends Component {
                 currentComments[idToEdit] = comment
                 this.setState({ comments: { ...currentComments } })
 
-                this.closeEditDialog()
+                this.toggleEditDialog()
             })
     }
 
-    componentDidMount() {
-        this.fetchCommentsPost()
-    }
 
     handleFormSubmit = (e) => {
         e.preventDefault()
@@ -158,7 +154,7 @@ class CommentsSection extends Component {
                 this.handleFormSubmit, comments,
                 this.handleUpVoteComment, this.handleDownVoteComment,
                 this.handleEditComment, this.handleDeleteComment,
-                isEditDialogOpen, this.closeEditDialog, commentToEdit, this.saveCommentEdit
+                isEditDialogOpen, this.toggleEditDialog, commentToEdit, this.saveCommentEdit
             )
         )
     }
@@ -170,11 +166,4 @@ function mapStateToProps ({ loggedUser }) {
     }
 }
 
-function mapDispatchToProps (dispatch) {
-    return {
-        // propsName: () => dispatch(actionCreator())
-    }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(CommentsSection)
+export default connect(mapStateToProps)(CommentsSection)
