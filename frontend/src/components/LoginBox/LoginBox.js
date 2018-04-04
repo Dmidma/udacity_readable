@@ -9,14 +9,14 @@ import LoginBoxTemplate from './LoginBoxTemplate'
 
 
 class LoginBox extends Component {
+    state = {
+        username: null
+    }
+
     componentWillMount() {
         if (this.props.userName !== null) {
             this.props.history.push("/")
         }
-    }
-
-    state = {
-        username: null
     }
 
     handleLoginSubmit() {

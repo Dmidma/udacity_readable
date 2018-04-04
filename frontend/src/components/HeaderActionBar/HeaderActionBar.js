@@ -31,12 +31,9 @@ class HeaderActionBar extends Component {
         this.props.fetchCategories()
     }
 
+    togglePostDialog = () => this.setState((currentState) => ({ isPostDialogOpen: !currentState.isPostDialogOpen }))
 
-    openPostDialog = () => this.setState({ isPostDialogOpen: true })
-    closePostDialog = () => this.setState({ isPostDialogOpen: false })
-
-    openDrawer = () => this.setState({ isDrawerOpen: true })
-    closeDrawer = () => this.setState({ isDrawerOpen: false })
+    toggleDrawer = () => this.setState((currentState) => ({ isDrawerOpen: !currentState.isDrawerOpen }))
 
 
     handleLogoutOnClik = () => {
@@ -76,8 +73,8 @@ class HeaderActionBar extends Component {
         return (
             HeaderActionBarTemplate(
                 username, page, this.handleLogoutOnClik,
-                isPostDialogOpen, this.openPostDialog, this.closePostDialog,
-                isDrawerOpen, this.openDrawer, this.closeDrawer,
+                isPostDialogOpen, this.togglePostDialog, this.togglePostDialog,
+                isDrawerOpen, this.toggleDrawer, this.toggleDrawer,
                 categoriesObj, this.clickCategory.bind(this), 
                 this.handlePostCreation.bind(this))
         )
