@@ -24,6 +24,12 @@ class PostCard extends Component {
         isEditDialogOpen: false
     }
 
+    componentDidMount() {
+        const { username, post } = this.props
+        if (post.author === username) {
+            this.setState({ isPostedByLoggedUser: true })
+        }
+    }
 
     handleUpVoteOnClick = () => this.props.upVotePost(this.props.postId)
     handleDownVoteOnClick = () => this.props.downVotePost(this.props.postId)
@@ -33,22 +39,13 @@ class PostCard extends Component {
     }
 
     confirmEdit = () => {
-        this.openEditDialog()
+        this.toggleEditDialog()
     }
 
-    closeEditDialog = () => this.setState({ isEditDialogOpen: false })
-    openEditDialog = () => this.setState({ isEditDialogOpen: true })
+    toggleEditDialog = () => this.setState((currentState) => ({ isEditDialogOpen: !currentState.isEditDialogOpen }))
 
     submitPostEdit = (title, body) => {
         this.props.updatePost(this.props.post.id, title, body)
-    }
-
-
-    componentDidMount() {
-        const { username, post } = this.props
-        if (post.author === username) {
-            this.setState({ isPostedByLoggedUser: true })
-        }
     }
 
     render() {
@@ -56,10 +53,10 @@ class PostCard extends Component {
         return (
             PostCardTemplate(
                 post, this.state.isPostedByLoggedUser,
-                this.handleUpVoteOnClick.bind(this),this.handleDownVoteOnClick.bind(this),
-                this.confirmDelete.bind(this), this.confirmEdit.bind(this),
-                this.state.isEditDialogOpen, this.closeEditDialog.bind(this),
-                this.submitPostEdit.bind(this), {title: post.title, content: post.body}
+                this.handleUpVoteOnClick, this.handleDownVoteOnClick,
+                this.confirmDelete, this.confirmEdit,
+                this.state.isEditDialogOpen, this.toggleEditDialog,
+                this.submitPostEdit, {title: post.title, content: post.body}
             )
         )
     }

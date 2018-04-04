@@ -1,6 +1,4 @@
 import { Component } from 'react'
-
-
 import { connect } from 'react-redux'
 
 class RootURL extends Component {
