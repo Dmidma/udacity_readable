@@ -9,6 +9,16 @@ import { parse } from 'qs'
 
 class APost extends Component {
 
+    constructor(props) {
+        super(props)
+        
+        this.confirmDelete = this.confirmDelete.bind(this)
+        this.confirmEdit = this.confirmEdit.bind(this)
+        this.submitPostEdit = this.submitPostEdit.bind(this)
+        this.toggleEditDialog = this.toggleEditDialog.bind(this)
+
+    }
+
     state = {
         post: {},
         isPostedByLoggedUser: false,
@@ -16,8 +26,9 @@ class APost extends Component {
         sort: "best"
     }
 
-    closeEditDialog = () => this.setState({ isEditDialogOpen: false })
-    openEditDialog = () => this.setState({ isEditDialogOpen: true })
+    
+    toggleEditDialog = () => this.setState((currentState) => ({ isEditDialogOpen: !currentState.isEditDialogOpen }))
+
 
     fetchPost = (postId) => {
         getPostById(postId).then(post => {
@@ -68,7 +79,7 @@ class APost extends Component {
     }
 
     confirmEdit = () => {
-        this.openEditDialog()
+        this.toggleEditDialog()
     }
  
     submitPostEdit = (title, body) => {
@@ -84,9 +95,9 @@ class APost extends Component {
         if (post["id"] === undefined) return null
         return (
             APostTemplate(isPostedByLoggedUser, post, 
-                this.confirmDelete.bind(this), this.confirmEdit.bind(this),
-                this.state.isEditDialogOpen, this.closeEditDialog.bind(this),
-                this.submitPostEdit.bind(this), {title: post.title, content: post.body},
+                this.confirmDelete, this.confirmEdit,
+                this.state.isEditDialogOpen, this.toggleEditDialog,
+                this.submitPostEdit, {title: post.title, content: post.body},
                 sort
             )
         )
