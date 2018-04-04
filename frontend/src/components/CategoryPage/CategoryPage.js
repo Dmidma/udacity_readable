@@ -64,9 +64,9 @@ class CategoryPage extends Component {
     // next: 1
     // prev: -1
     handlePaginationButtons = (direction) => () => {
-        const curretPage = this.state.page + direction
+        const currentPage = this.state.page + direction
         this.setState((oldState) => ({ page: oldState.page + direction }))
-        this.props.history.push("?page=" + curretPage)
+        this.props.history.push(`?page=${currentPage}`)
     }
     
 
@@ -82,8 +82,8 @@ class CategoryPage extends Component {
                 <Pagination 
                     page={this.state.page} 
                     finalPage={Math.ceil(this.props.postsIds.length / 3)}
-                    handleNext={this.handlePaginationButtons(1).bind(this)}
-                    handlePrev={this.handlePaginationButtons(-1).bind(this)}
+                    handleNext={this.handlePaginationButtons(1)}
+                    handlePrev={this.handlePaginationButtons(-1)}
                 />
             </div>
         )

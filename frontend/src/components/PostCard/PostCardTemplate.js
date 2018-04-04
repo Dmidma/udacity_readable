@@ -2,17 +2,14 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 
-import FontIcon from 'material-ui/FontIcon'
-import { blue500 } from 'material-ui/styles/colors'
 import UpdatePostBox from '../UpdatePostBox/'
 import Dialog from 'material-ui/Dialog'
 import CreatePost from '../CreatePost/'
-
+import VoteBox from '../VoteBox'
 
 
 const PostCardTemplate = (
     post, isPostedByLoggedUser,
-    handleUpVote, handleDownVote, 
     confirmDelete, confirmEdit,
     isEditDialogOpen, closeEditDialog, 
     submitPostEdit, editValues) => {
@@ -26,23 +23,7 @@ const PostCardTemplate = (
     return (
 
       <div className="post-box">
-        <div>
-            <FontIcon
-                className="material-icons"
-                hoverColor={blue500} 
-                onClick={handleUpVote}
-            >
-                    thumb_up
-            </FontIcon>
-            <h3>{post.voteScore}</h3>
-            <FontIcon
-                className="material-icons"
-                hoverColor={blue500} 
-                onClick={handleDownVote}
-            >
-                    thumb_down
-            </FontIcon>
-        </div>
+        <VoteBox postId={post.id} voteScore={post.voteScore} />
         <div className="content-section">
         <Link className="post-title" to={postUrl} >
             {post.title}
