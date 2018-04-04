@@ -19,8 +19,7 @@ class UpdatePostBox extends Component {
         action: 1 // 0: for editing, 1: for deleting
     }
 
-    closeConfirmDialog = () => this.setState({ isConfirmOpen: false })
-    openConfirmDialog = () => this.setState({ isConfirmOpen: true })
+    toggleConfirmDialog = () => this.setState((currentState) => ({ isConfirmOpen: !currentState.isConfirmOpen }))
 
     setEditAsAction = () => this.setState({ action: 0})
     setDeleteAsAction = () => this.setState({ action: 1})
@@ -28,13 +27,13 @@ class UpdatePostBox extends Component {
     handleEdit = () => {
         this.setConfirmMessage("edit")
         this.setEditAsAction()
-        this.openConfirmDialog()
+        this.toggleConfirmDialog()
     }
 
     handleDelete = () => {
         this.setConfirmMessage("delete")
         this.setDeleteAsAction()
-        this.openConfirmDialog()
+        this.toggleConfirmDialog()
     }
 
     handleAcceptAction = () => {
@@ -47,7 +46,7 @@ class UpdatePostBox extends Component {
             break;
             default:
         }
-        this.closeConfirmDialog()
+        this.toggleConfirmDialog()
     }
 
     setConfirmMessage = (action) =>  {
@@ -62,7 +61,7 @@ class UpdatePostBox extends Component {
 
     render() {
         return (
-            UpdatePostBoxTemplate(this.handleEdit, this.handleDelete, this.state.confirmMessage, this.state.isConfirmOpen, this.closeConfirmDialog, this.handleAcceptAction)
+            UpdatePostBoxTemplate(this.handleEdit, this.handleDelete, this.state.confirmMessage, this.state.isConfirmOpen, this.toggleConfirmDialog, this.handleAcceptAction)
         )
     }
 }
