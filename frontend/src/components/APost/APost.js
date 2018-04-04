@@ -8,7 +8,6 @@ import { deletePost, editPost } from '../../actions/postsActions'
 import { parse } from 'qs'
 
 class APost extends Component {
-
     constructor(props) {
         super(props)
         
@@ -16,7 +15,6 @@ class APost extends Component {
         this.confirmEdit = this.confirmEdit.bind(this)
         this.submitPostEdit = this.submitPostEdit.bind(this)
         this.toggleEditDialog = this.toggleEditDialog.bind(this)
-
     }
 
     state = {
@@ -24,6 +22,19 @@ class APost extends Component {
         isPostedByLoggedUser: false,
         isEditDialogOpen: false,
         sort: "best"
+    }
+
+    componentDidMount() {
+        if (this.props.username === null) {
+            this.props.history.push("/")
+            return
+        }
+        this.fetchPost(this.props.match.params.post_id)
+        this.checkSortQuery(this.props.history.location.search)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.checkSortQuery(nextProps.history.location.search)
     }
 
     
@@ -57,20 +68,6 @@ class APost extends Component {
                 this.props.history.replace(this.props.history.location.pathname)
             }
         }
-    }
-
-
-    componentDidMount() {
-        if (this.props.username === null) {
-            this.props.history.push("/")
-            return
-        }
-        this.fetchPost(this.props.match.params.post_id)
-        this.checkSortQuery(this.props.history.location.search)
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.checkSortQuery(nextProps.history.location.search)
     }
 
     confirmDelete = () => {
