@@ -81,10 +81,14 @@ class APost extends Component {
  
     submitPostEdit = (title, body) => {
         this.props.updatePost(this.state.post.id, title, body)
-        let oldPost = this.state.post;
-        oldPost.title = title
-        oldPost.body = body
-        this.setState({ post: oldPost })
+        this.setState((currentState) => ({ 
+            post: {
+                ...currentState.post,
+                id: this.state.post.id,
+                title,
+                body
+            }
+        }))
     }
 
     render() {
