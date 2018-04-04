@@ -12,8 +12,6 @@ class SortBox extends Component {
         isInComments: PropTypes.bool
     } 
 
-
-    sortArray = ["best", "worst", "newest", "oldest"]
     state = {
         sort: 1,
     }
@@ -26,6 +24,8 @@ class SortBox extends Component {
     componentDidMount() {
         this.setState({ sort: this.sortArray.indexOf(this.props.sort) + 1 })
     }
+
+    sortArray = ["best", "worst", "newest", "oldest"]
 
     handleSortChanging = (e, i, v) => {
         if (this.props.isInComments) {
