@@ -14,11 +14,22 @@ class VoteBox extends Component {
 
     static propTypes = {
         postId: PropTypes.string.isRequired,
-        voteScore: PropTypes.number.isRequired
+        voteScore: PropTypes.number.isRequired,
+        updateVote: PropTypes.func
     }
 
-    handleUpVoteOnClick = () => this.props.upVotePost()
-    handleDownVoteOnClick = () => this.props.downVotePost()
+    handleUpVoteOnClick = () => {
+        this.props.upVotePost()
+        if (this.props.updateVote) {
+            this.props.updateVote(this.props.voteScore + 1)
+        }
+    }
+    handleDownVoteOnClick = () => {
+        this.props.downVotePost()
+        if (this.props.updateVote) {
+            this.props.updateVote(this.props.voteScore - 1)
+        }
+    }
 
     render() {
         return (

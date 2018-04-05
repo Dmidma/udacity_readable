@@ -91,6 +91,13 @@ class APost extends Component {
         }))
     }
 
+    updateVote = (voteScore) => this.setState((currentState) => ({ 
+        post: {
+            ...currentState.post,
+            voteScore
+        } 
+    }))
+
     render() {
         const { sort, post, isPostedByLoggedUser } = this.state
         if (post["id"] === undefined) return null
@@ -99,7 +106,7 @@ class APost extends Component {
                 this.confirmDelete, this.confirmEdit,
                 this.state.isEditDialogOpen, this.toggleEditDialog,
                 this.submitPostEdit, {title: post.title, content: post.body},
-                sort
+                sort, this.updateVote
             )
         )
     }

@@ -7,19 +7,26 @@ import UpdatePostBox from '../UpdatePostBox'
 import CommentsSection from '../CommentsSection'
 import CreatePost from '../CreatePost'
 import SortBox from '../SortBox'
+import VoteBox from '../VoteBox'
 
 
 const APostTemplate = (isPostedByLoggedUser, post, 
     confirmDelete, confirmEdit,
     isEditDialogOpen, closeEditDialog, 
     submitPostEdit, editValues,
-    sort) => (
+    sort, updateVote) => (
     <div>
         <HeaderActionBar page={`/c/${post.category}`} />
         <Card className="post-details">
+            <div className="post-box">
+            <VoteBox 
+                postId={post.id} 
+                voteScore={post.voteScore}
+                updateVote={updateVote} />
             <CardTitle 
                 title={post.title} 
                 subtitle={`Posted By ${post.author} on /c/${post.category}`} />
+</div>
             <CardText>
                 <p className="post-content">{post.body}</p>
 
@@ -34,7 +41,6 @@ const APostTemplate = (isPostedByLoggedUser, post,
 
             </CardText>
         </Card>
-
 
         <SortBox 
             sort={sort} 

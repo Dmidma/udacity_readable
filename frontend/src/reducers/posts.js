@@ -38,22 +38,30 @@ export const posts = (state = initPosts, action) => {
             sortPosts(newState, sortArray, state.sort)
             newState.ids = [...sortArray]
             return newState        
-        case UPVOTE_POST:
-            return {
-                ...state,
-                [action.id]: {
-                    ...state[action.id], 
-                    voteScore: state[action.id].voteScore + 1
+        case UPVOTE_POST: {
+            if (state[action.id]) {
+                return {
+                    ...state,
+                    [action.id]: {
+                        ...state[action.id], 
+                        voteScore: state[action.id].voteScore + 1
+                    }
                 }
             }
-        case DOWNVOTE_POST:
-            return {
-                ...state,
-                [action.id]: {
-                    ...state[action.id], 
-                    voteScore: state[action.id].voteScore - 1
+            return state
+        }
+        case DOWNVOTE_POST: {
+            if (state[action.id]) {
+                return {
+                    ...state,
+                    [action.id]: {
+                        ...state[action.id], 
+                        voteScore: state[action.id].voteScore - 1
+                    }
                 }
             }
+            return state
+        }
         case ADD_NEW_POST:
             if (state.category !== "all" && state.category !== action.post.category) {
                 return state
